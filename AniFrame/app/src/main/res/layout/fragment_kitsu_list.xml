@@ -8,6 +8,7 @@
     tools:context=".fragments.KitsuListFragment">
 
 
+
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -26,6 +27,43 @@
             android:lineBreakStyle="normal"/>
     </androidx.cardview.widget.CardView>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="12dp">
+        <Button
+            android:id="@+id/all_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="All" />
+        <Button
+            android:id="@+id/trending"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Trending"/>
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="12dp">
+        <TextView
+            android:id="@+id/sorting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sort by" />
+        <Button
+            android:id="@+id/sort_rating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:text="Rating"/>
+
+
+    </LinearLayout>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/kitsu_list"
         android:layout_width="match_parent"

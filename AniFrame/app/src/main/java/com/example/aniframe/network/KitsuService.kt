@@ -1,14 +1,25 @@
 package com.example.aniframe.network
 
-import android.app.Service
-import android.content.Intent
-import android.os.IBinder
-import com.example.aniframe.models.Kitsu
 import retrofit2.Call
 import retrofit2.http.GET
+import retrofit2.http.Query
 
 interface KitsuService  {
+
     @GET("anime")
-    fun fetchKitsuList(): Call<KitsuApiResponse>
+    fun fetchKitsuList(
+        @Query("page[limit]") limit: Int,
+        @Query("page[offset]") offset: Int
+    ): Call<KitsuApiResponse>
+    @GET("anime")
+    fun fetchKitsuListByName(
+        @Query("filter[text]") searchText: String): Call<KitsuApiResponse>
+
+    @GET("trending/anime")
+    fun fetchKitsuTrendingList(): Call<KitsuApiResponse>
+
+    @GET("anime")
+    fun sortBy(
+        @Query("sort") sortAttr: String) : Call<KitsuApiResponse>
 
 }

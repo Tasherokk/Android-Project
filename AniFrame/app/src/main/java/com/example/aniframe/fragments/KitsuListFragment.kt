@@ -19,9 +19,7 @@ import retrofit2.Response
 
 class KitsuListFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = KitsuListFragment()
-    }
+    private var currentSearchQuery: String = ""
     private var original: List<Kitsu> = ArrayList()
     private var _binding: FragmentKitsuListBinding? = null
     private val binding
@@ -41,28 +39,96 @@ class KitsuListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        fetchKitsuList()
+        binding.editText.addTextChangedListener {
+            val searchQuery = it.toString()
+            if (searchQuery != currentSearchQuery) {
+                currentSearchQuery = searchQuery
+                if (searchQuery.isEmpty()) {
+                    adapter.submitList(original)
+                } else {
+                    fetchKitsuByName(searchQuery)
+                }
+            }
+        }
+        binding.allButton.setOnClickListener{
+            fetchKitsuList()
+        }
+        binding.trending.setOnClickListener {
+            fetchKitsuTrending()
+        }
+        binding.sortRating.setOnClickListener {
+            sortBy("averageRating")
+        }
 
         setupUI()
+
+    }
+
+    private fun sortBy(attr: String){
         val client = KitsuApiClient.instance
-        val response = client.fetchKitsuList()
+        val response = client.sortBy( "-"+ attr)
+        response.enqueue(object : Callback<KitsuApiResponse> {
+            override fun onResponse(call: Call<KitsuApiResponse>, response: Response<KitsuApiResponse>) {
+
+                response.body()?.let {
+                    adapter.submitList(it.data)
+                }
+            }
+            override fun onFailure(call: Call<KitsuApiResponse>, t: Throwable) {
+                println("${t.message}")
+            }
+        })
+    }
+    private fun fetchKitsuTrending(){
+        val client = KitsuApiClient.instance
+        val response = client.fetchKitsuTrendingList()
+        response.enqueue(object : Callback<KitsuApiResponse> {
+            override fun onResponse(call: Call<KitsuApiResponse>, response: Response<KitsuApiResponse>) {
+
+                response.body()?.let {
+                    adapter.submitList(it.data)
+                }
+            }
+            override fun onFailure(call: Call<KitsuApiResponse>, t: Throwable) {
+                println("${t.message}")
+            }
+        })
+    }
+    private fun fetchKitsuByName(name: String) {
+        val client = KitsuApiClient.instance
+        val response = client.fetchKitsuListByName(name)
         response.enqueue(object : Callback<KitsuApiResponse> {
             override fun onResponse(call: Call<KitsuApiResponse>, response: Response<KitsuApiResponse>) {
                 response.body()?.let {
                     adapter.submitList(it.data)
-                    original = it.data
                 }
+
             }
 
             override fun onFailure(call: Call<KitsuApiResponse>, t: Throwable) {
                 println("${t.message}")
             }
         })
-
     }
+    private fun fetchKitsuList() {
+        val client = KitsuApiClient.instance
+        val response = client.fetchKitsuList(10, 0)
+        response.enqueue(object : Callback<KitsuApiResponse> {
+            override fun onResponse(call: Call<KitsuApiResponse>, response: Response<KitsuApiResponse>) {
+                response.body()?.let {
+                    adapter.submitList(it.data)
+                    original = it.data
 
+                }
 
+            }
 
+            override fun onFailure(call: Call<KitsuApiResponse>, t: Throwable) {
+                println("${t.message}")
+            }
+        })
+    }
 
     private fun setupUI() {
         with(binding) {
