@@ -3,7 +3,10 @@ package com.example.aniframe
 import com.example.aniframe.fragments.SorulySearchFragment
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import com.example.aniframe.databinding.ActivityMainBinding
+import com.example.aniframe.fragments.KitsuListFragment
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -12,10 +15,35 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        replaceFragment(KitsuListFragment())
 
+        binding.bottomNavigationView.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.kitsu -> {
+                    replaceFragment(KitsuListFragment())
+                    true
+                }
+                R.id.soruly -> {
+                    replaceFragment(SorulySearchFragment())
+                    true
+                }
+                R.id.favorite -> {
+                    replaceFragment(SorulySearchFragment())
+                    true
+                }
+                else -> true
+            }
+        }
+
+    }
+
+
+    private fun replaceFragment(fragment: Fragment) {
         supportFragmentManager
             .beginTransaction()
-            .add(R.id.fragment_container_view, SorulySearchFragment())
+            .replace(R.id.frame_layout, fragment)
             .commit()
     }
+
+
 }

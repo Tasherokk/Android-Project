@@ -1,5 +1,6 @@
 package com.example.aniframe.network
 
+import com.example.aniframe.models.SorulySearchResult
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import okhttp3.MediaType
@@ -32,15 +33,21 @@ class SorulySearchImageTask() {
                 val responseBody = response.body()?.string()
                 val jsonObject = JSONObject(responseBody)
                 val resultArray = jsonObject.getJSONArray("result")
-                val firstResult = resultArray.getJSONObject(0)
 
-                val anilist = firstResult.getInt("anilist")
-                val filename = firstResult.getString("filename")
-                val similarity = firstResult.getDouble("similarity")
-                val image = firstResult.getString("image")
+                val searchResults = mutableListOf<SorulySearchResult>()
+                for (i in 0 until resultArray.length()) {
+                    val resultObject = resultArray.getJSONObject(i)
+                    val anilist = resultObject.getInt("anilist")
+                    val filename = resultObject.getString("filename")
+                    val similarity = resultObject.getDouble("similarity")
+                    val image = resultObject.getString("image")
 
-                val searchResult = SorulySearchResult(anilist, filename, similarity, image)
-                searchResult
+                    val searchResult = SorulySearchResult(anilist, filename, similarity, image)
+                    searchResults.add(searchResult)
+                }
+                searchResults
+
+
             } catch (e: IOException) {
                 e.printStackTrace()
                 "Error occurred: ${e.message}"

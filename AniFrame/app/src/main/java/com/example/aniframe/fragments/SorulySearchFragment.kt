@@ -9,13 +9,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import com.example.aniframe.R
 import com.example.aniframe.databinding.FragmentSorulySearchBinding
-import com.example.aniframe.databinding.FragmentSorulySearchResultBinding
-import com.example.aniframe.network.SorulySearchResult
+import com.example.aniframe.models.SorulySearchResult
 import kotlinx.coroutines.*
 import java.io.File
 import java.io.FileOutputStream
@@ -42,9 +40,9 @@ class SorulySearchFragment : androidx.fragment.app.Fragment(), CoroutineScope {
                             val sorulySearchImageTask = SorulySearchImageTask()
                             val searchResult = sorulySearchImageTask.searchImage(jpegFile)
                             // Переход на SearchResultFragment с передачей результатов поиска
-                            val fragment = SorulySearchResultFragment.newInstance(searchResult as SorulySearchResult)
+                            val fragment = SorulySearchResultFragment.newInstance(searchResult as List<SorulySearchResult>)
                             parentFragmentManager.beginTransaction()
-                                .replace(R.id.fragment_container_view, fragment)
+                                .replace(R.id.frame_layout, fragment)
                                 .addToBackStack(null)
                                 .commit()
                         }
