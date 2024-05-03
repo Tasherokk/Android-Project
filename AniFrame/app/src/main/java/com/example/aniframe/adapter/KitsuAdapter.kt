@@ -2,6 +2,7 @@ package com.example.aniframe.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Spinner
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -36,7 +37,6 @@ class KitsuAdapter(
             with(binding){
                 val age = kitsu.attributes.ageRating
                 val poster = kitsu.attributes.posterImage.small
-
                 canonTitle.text = kitsu.attributes.canonicalTitle
                 createdAt.text = "Created Date: " + kitsu.attributes.createdAt
                 averageRating.text = kitsu.attributes.averageRating
@@ -47,6 +47,7 @@ class KitsuAdapter(
                 favorite.setOnClickListener{
                     onSaveAnime(kitsu)
                 }
+
             }
         }
     }

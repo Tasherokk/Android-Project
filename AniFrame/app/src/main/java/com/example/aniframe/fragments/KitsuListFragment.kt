@@ -95,10 +95,7 @@ class KitsuListFragment : Fragment() {
         binding.sortRating.setOnClickListener {
             viewModel.sortBy("averageRating")
         }
-
-
     }
-
 }
 
 

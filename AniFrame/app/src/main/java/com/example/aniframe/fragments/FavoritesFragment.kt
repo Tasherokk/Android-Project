@@ -5,10 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Spinner
 
 import androidx.lifecycle.ViewModelProvider
 
 import androidx.room.Room
+import com.example.aniframe.R
 
 import com.example.aniframe.adapter.FavoritesAdapter
 import com.example.aniframe.database.KitsuDatabase
@@ -50,9 +52,12 @@ class FavoritesFragment : Fragment() {
                 onDeleteAnime = {
                     viewModel.deleteAnime(it)
                     setupUI()
-                }
+                },
+                requireContext()
         )
         setupUI()
+        val tagList = resources.getStringArray(R.array.tag_list).toList()
+        adapter?.setTags(tagList)
 
         viewModel.favoritesListState.observe(viewLifecycleOwner) { state ->
             when (state) {

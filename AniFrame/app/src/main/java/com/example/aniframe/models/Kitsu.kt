@@ -5,7 +5,8 @@ import java.util.UUID
 data class Kitsu (
     val id: String,
     val type: String,
-    val attributes: Attributes
+    val attributes: Attributes,
+    val tag: String? = null
 )
 
 

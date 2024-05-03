@@ -35,7 +35,6 @@ class FavoritesViewModel(
         viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
             val response = async { kitsuDao.getAll() }
             val kitsuList = response.await()
-
             withContext(Dispatchers.Main) {
                 _favoritesListState.setValue(
                         FavoritesListState.Success(

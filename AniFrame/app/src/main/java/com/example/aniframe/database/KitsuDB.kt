@@ -9,7 +9,8 @@ import androidx.room.PrimaryKey
 data class KitsuDB(
         @PrimaryKey val id: String,
         val type: String,
-        @Embedded val attributes: AttributesDB
+        @Embedded val attributes: AttributesDB,
+        val tag: String? = null
 )
 
 data class AttributesDB(
