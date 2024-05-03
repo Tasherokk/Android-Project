@@ -1,25 +1,24 @@
 package com.example.aniframe.network
 
-import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface KitsuService  {
 
     @GET("anime")
-    fun fetchKitsuList(
+    suspend fun fetchKitsuList(
         @Query("page[limit]") limit: Int,
         @Query("page[offset]") offset: Int
-    ): Call<KitsuApiResponse>
+    ): KitsuApiResponse
     @GET("anime")
-    fun fetchKitsuListByName(
-        @Query("filter[text]") searchText: String): Call<KitsuApiResponse>
+    suspend fun fetchKitsuListByName(
+        @Query("filter[text]") searchText: String): KitsuApiResponse
 
     @GET("trending/anime")
-    fun fetchKitsuTrendingList(): Call<KitsuApiResponse>
+    suspend fun fetchKitsuTrendingList(): KitsuApiResponse
 
     @GET("anime")
-    fun sortBy(
-        @Query("sort") sortAttr: String) : Call<KitsuApiResponse>
+    suspend fun sortBy(
+        @Query("sort") sortAttr: String) : KitsuApiResponse
 
 }

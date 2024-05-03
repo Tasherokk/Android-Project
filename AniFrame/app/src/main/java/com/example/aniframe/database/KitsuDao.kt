@@ -12,4 +12,6 @@ interface KitsuDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(kitsuList: List<KitsuDB>)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insert(kitsu: KitsuDB)
 }

@@ -42,6 +42,8 @@ android {
 
 dependencies {
 
+    implementation("androidx.legacy:legacy-support-v4:1.0.0")
+    implementation("androidx.recyclerview:recyclerview:1.3.2")
     val navVersion = "2.7.7"
     val roomVersion = "2.6.1"
 

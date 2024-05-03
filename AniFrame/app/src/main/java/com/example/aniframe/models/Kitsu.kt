@@ -8,6 +8,7 @@ data class Kitsu (
     val attributes: Attributes
 )
 
+
 data class Attributes(
     val createdAt: String,
     val canonicalTitle: String,

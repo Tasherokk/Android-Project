@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.example.aniframe.databinding.ActivityMainBinding
+import com.example.aniframe.fragments.FavoritesFragment
 import com.example.aniframe.fragments.KitsuListFragment
 
 class MainActivity : AppCompatActivity() {
@@ -28,7 +29,7 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.favorite -> {
-                    replaceFragment(SorulySearchFragment())
+                    replaceFragment(FavoritesFragment())
                     true
                 }
                 else -> true
