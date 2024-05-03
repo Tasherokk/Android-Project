@@ -10,7 +10,7 @@ import com.example.aniframe.databinding.ItemFavoritesBinding
 import com.example.aniframe.databinding.ItemKitsuBinding
 import com.example.aniframe.models.Kitsu
 
-class FavoritesAdapter: ListAdapter<Kitsu, FavoritesAdapter.ViewHolder>(KitsuItemCallback()) {
+class FavoritesAdapter(private val onDeleteAnime: (Kitsu) -> Unit): ListAdapter<Kitsu, FavoritesAdapter.ViewHolder>(KitsuItemCallback()) {
 
 
 
@@ -42,6 +42,9 @@ class FavoritesAdapter: ListAdapter<Kitsu, FavoritesAdapter.ViewHolder>(KitsuIte
                 Glide.with(posterImage)
                     .load(poster)
                     .into(posterImage)
+                delete.setOnClickListener{
+                    onDeleteAnime(kitsu)
+                }
             }
         }
     }

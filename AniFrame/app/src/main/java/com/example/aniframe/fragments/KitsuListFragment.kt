@@ -71,7 +71,7 @@ class KitsuListFragment : Fragment() {
                             .setMessage(state.message ?: getString(R.string.error_message))
                             .show()
                 }
-                is KitsuListState.SuccessAnimeSave -> Toast.makeText(requireContext(), "Success", Toast.LENGTH_LONG).show()
+                is KitsuListState.SuccessAnimeSave -> Toast.makeText(requireContext(), "Success", Toast.LENGTH_SHORT).show()
                 else -> {}
             }
         }

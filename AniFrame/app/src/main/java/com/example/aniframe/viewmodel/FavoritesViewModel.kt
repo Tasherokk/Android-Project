@@ -5,8 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.example.aniframe.database.KitsuDao
-import com.example.aniframe.database.KitsuDbMapper
+import com.example.aniframe.database.*
 import com.example.aniframe.models.Kitsu
 import kotlinx.coroutines.*
 
@@ -48,8 +47,33 @@ class FavoritesViewModel(
             }
         }
     }
+    fun deleteAnime(kitsu: Kitsu){
+        viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
+            val posterImage = kitsu.attributes.posterImage
+            val attributes = AttributesDB(
+                    createdAt = kitsu.attributes.createdAt,
+                    canonicalTitle = kitsu.attributes.canonicalTitle,
+                    averageRating = kitsu.attributes.averageRating,
+                    ageRating = kitsu.attributes.ageRating.name,
+                    posterImage = PosterImageDB(
+                            tiny = posterImage.tiny,
+                            small = posterImage.small,
+                            large = posterImage.large,
+                            original = posterImage.original
+                    )
+            )
+            val kitsuDB = KitsuDB(
+                    id = kitsu.id,
+                    type = kitsu.type,
+                    attributes = attributes
+            )
+            kitsuDao.delete(kitsuDB)
+            _favoritesListState.postValue(FavoritesListState.SuccessAnimeSave)
+        }
+    }
 }
 sealed class FavoritesListState {
     data class Success(val items: List<Kitsu>) : FavoritesListState()
+    data object SuccessAnimeSave: FavoritesListState()
     data class Error(val message: String? = null) : FavoritesListState()
 }

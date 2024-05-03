@@ -46,10 +46,13 @@ class FavoritesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        adapter = FavoritesAdapter()
-        binding.kitsuList.adapter = adapter
-
-        viewModel.fetchKitsuListDB()
+        adapter = FavoritesAdapter(
+                onDeleteAnime = {
+                    viewModel.deleteAnime(it)
+                    setupUI()
+                }
+        )
+        setupUI()
 
         viewModel.favoritesListState.observe(viewLifecycleOwner) { state ->
             when (state) {
@@ -60,71 +63,13 @@ class FavoritesFragment : Fragment() {
         }
 
     }
+    private fun setupUI() {
+        with(binding) {
+            binding.kitsuList.adapter = adapter
 
-//    private fun sortBy(attr: String){
-//        val client = KitsuApiClient.instance
-//        val response = client.sortBy( "-"+ attr)
-//        response.enqueue(object : Callback<KitsuApiResponse> {
-//            override fun onResponse(call: Call<KitsuApiResponse>, response: Response<KitsuApiResponse>) {
-//
-//                response.body()?.let {
-//                    adapter?.submitList(it.data)
-//                }
-//            }
-//            override fun onFailure(call: Call<KitsuApiResponse>, t: Throwable) {
-//                println("${t.message}")
-//            }
-//        })
-//    }
-//    private fun fetchKitsuTrending(){
-//        val client = KitsuApiClient.instance
-//        val response = client.fetchKitsuTrendingList()
-//        response.enqueue(object : Callback<KitsuApiResponse> {
-//            override fun onResponse(call: Call<KitsuApiResponse>, response: Response<KitsuApiResponse>) {
-//
-//                response.body()?.let {
-//                    adapter?.submitList(it.data)
-//                }
-//            }
-//            override fun onFailure(call: Call<KitsuApiResponse>, t: Throwable) {
-//                println("${t.message}")
-//            }
-//        })
-//    }
-//    private fun fetchKitsuByName(name: String) {
-//        val client = KitsuApiClient.instance
-//        val response = client.fetchKitsuListByName(name)
-//        response.enqueue(object : Callback<KitsuApiResponse> {
-//            override fun onResponse(call: Call<KitsuApiResponse>, response: Response<KitsuApiResponse>) {
-//                response.body()?.let {
-//                    adapter?.submitList(it.data)
-//                }
-//
-//            }
-//
-//            override fun onFailure(call: Call<KitsuApiResponse>, t: Throwable) {
-//                println("${t.message}")
-//            }
-//        })
-//    }
-//    private fun fetchKitsuList() {
-//        val client = KitsuApiClient.instance
-//        val response = client.fetchKitsuList(10, 0)
-//        response.enqueue(object : Callback<KitsuApiResponse> {
-//            override fun onResponse(call: Call<KitsuApiResponse>, response: Response<KitsuApiResponse>) {
-//                response.body()?.let {
-//                    adapter?.submitList(it.data)
-//                    original = it.data
-//                }
-//
-//            }
-//
-//            override fun onFailure(call: Call<KitsuApiResponse>, t: Throwable) {
-//                println("${t.message}")
-//            }
-//        })
-//    }
-
+            viewModel.fetchKitsuListDB()
+        }
+    }
 }
 
 
