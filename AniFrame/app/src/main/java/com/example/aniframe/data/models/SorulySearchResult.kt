@@ -1,4 +1,4 @@
-package com.example.aniframe.models
+package com.example.aniframe.data.models
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize

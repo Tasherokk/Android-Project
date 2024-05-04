@@ -1,9 +1,9 @@
-package com.example.aniframe.database
+package com.example.aniframe.data.database
 
-import com.example.aniframe.models.AgeRating
-import com.example.aniframe.models.Attributes
-import com.example.aniframe.models.Kitsu
-import com.example.aniframe.models.PosterImage
+import com.example.aniframe.data.models.AgeRating
+import com.example.aniframe.data.models.Attributes
+import com.example.aniframe.data.models.Kitsu
+import com.example.aniframe.data.models.PosterImage
 
 val KitsuDbMapper: (KitsuDB) -> Kitsu = {
     Kitsu(

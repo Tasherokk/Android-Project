@@ -1,4 +1,4 @@
-package com.example.aniframe.network
+package com.example.aniframe.data.network
 
 import retrofit2.http.GET
 import retrofit2.http.Query

@@ -1,4 +1,4 @@
-package com.example.aniframe.database
+package com.example.aniframe.data.database
 
 import androidx.room.ColumnInfo
 import androidx.room.Embedded
@@ -9,8 +9,7 @@ import androidx.room.PrimaryKey
 data class KitsuDB(
         @PrimaryKey val id: String,
         val type: String,
-        @Embedded val attributes: AttributesDB,
-        val tag: String? = null
+        @Embedded val attributes: AttributesDB
 )
 
 data class AttributesDB(

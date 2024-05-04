@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.aniframe.databinding.ItemKitsuBinding
-import com.example.aniframe.models.Kitsu
+import com.example.aniframe.data.models.Kitsu
 
 class KitsuAdapter(
         private val onSaveAnime:(Kitsu) -> Unit

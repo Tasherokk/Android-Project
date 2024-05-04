@@ -1,6 +1,6 @@
-package com.example.aniframe.fragments
+package com.example.aniframe.ui.fragments
 
-import com.example.aniframe.network.SorulySearchImageTask
+import com.example.aniframe.data.network.SorulySearchImageTask
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -13,7 +13,7 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import com.example.aniframe.R
 import com.example.aniframe.databinding.FragmentSorulySearchBinding
-import com.example.aniframe.models.SorulySearchResult
+import com.example.aniframe.data.models.SorulySearchResult
 import kotlinx.coroutines.*
 import java.io.File
 import java.io.FileOutputStream

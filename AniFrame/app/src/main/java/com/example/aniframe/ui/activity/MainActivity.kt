@@ -1,13 +1,13 @@
-package com.example.aniframe
+package com.example.aniframe.ui.activity
 
-import com.example.aniframe.fragments.SorulySearchFragment
+import com.example.aniframe.ui.fragments.SorulySearchFragment
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
+import com.example.aniframe.R
 import com.example.aniframe.databinding.ActivityMainBinding
-import com.example.aniframe.fragments.FavoritesFragment
-import com.example.aniframe.fragments.KitsuListFragment
+import com.example.aniframe.ui.fragments.FavoritesFragment
+import com.example.aniframe.ui.fragments.KitsuListFragment
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding

@@ -1,26 +1,26 @@
-package com.example.aniframe.viewmodel
+package com.example.aniframe.ui.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.example.aniframe.database.AttributesDB
-import com.example.aniframe.database.KitsuDB
-import com.example.aniframe.database.KitsuDao
-import com.example.aniframe.database.PosterImageDB
-import com.example.aniframe.models.Kitsu
-import com.example.aniframe.network.KitsuService
+import com.example.aniframe.data.database.AttributesDB
+import com.example.aniframe.data.database.KitsuDB
+import com.example.aniframe.data.database.KitsuDao
+import com.example.aniframe.data.database.PosterImageDB
+import com.example.aniframe.data.models.Kitsu
+import com.example.aniframe.data.network.KitsuService
 import kotlinx.coroutines.*
 
 class KitsuListViewModel(
-        private val service: KitsuService,
-        private val kitsuDao: KitsuDao
+    private val service: KitsuService,
+    private val kitsuDao: KitsuDao
 ) : ViewModel() {
 
     class Provider(
-            val service: KitsuService,
-            val dao: KitsuDao
+        val service: KitsuService,
+        val dao: KitsuDao
     ) : ViewModelProvider.Factory {
 
         @Suppress("UNCHECKED_CAST")
