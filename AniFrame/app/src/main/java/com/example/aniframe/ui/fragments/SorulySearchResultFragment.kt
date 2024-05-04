@@ -1,4 +1,4 @@
-package com.example.aniframe.fragments
+package com.example.aniframe.ui.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.example.aniframe.adapter.KitsuAdapter
 import com.example.aniframe.adapter.SorulyAdapter
-import com.example.aniframe.models.SorulySearchResult
+import com.example.aniframe.data.models.SorulySearchResult
 import com.example.aniframe.databinding.FragmentSorulySearchResultBinding
 
 class SorulySearchResultFragment : Fragment() {

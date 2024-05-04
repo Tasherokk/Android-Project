@@ -8,8 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.aniframe.databinding.ItemKitsuBinding
 import com.example.aniframe.databinding.ItemSorulyBinding
-import com.example.aniframe.models.Kitsu
-import com.example.aniframe.models.SorulySearchResult
+import com.example.aniframe.data.models.Kitsu
+import com.example.aniframe.data.models.SorulySearchResult
 
 class SorulyAdapter: ListAdapter<SorulySearchResult, SorulyAdapter.ViewHolder>(SorulyItemCallback()) {
 

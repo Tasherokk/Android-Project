@@ -1,4 +1,4 @@
-package com.example.aniframe.fragments
+package com.example.aniframe.ui.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,14 +10,14 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.widget.addTextChangedListener
 import com.example.aniframe.adapter.KitsuAdapter
 import com.example.aniframe.databinding.FragmentKitsuListBinding
-import com.example.aniframe.models.Kitsu
-import com.example.aniframe.network.KitsuApiClient
+import com.example.aniframe.data.models.Kitsu
+import com.example.aniframe.data.network.KitsuApiClient
 import androidx.lifecycle.ViewModelProvider
 import androidx.room.Room
 import com.example.aniframe.R
-import com.example.aniframe.database.KitsuDatabase
-import com.example.aniframe.viewmodel.KitsuListState
-import com.example.aniframe.viewmodel.KitsuListViewModel
+import com.example.aniframe.data.database.KitsuDatabase
+import com.example.aniframe.ui.viewmodel.KitsuListState
+import com.example.aniframe.ui.viewmodel.KitsuListViewModel
 
 
 class KitsuListFragment : Fragment() {

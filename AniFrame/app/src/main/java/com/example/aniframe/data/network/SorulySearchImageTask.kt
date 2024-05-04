@@ -1,6 +1,6 @@
-package com.example.aniframe.network
+package com.example.aniframe.data.network
 
-import com.example.aniframe.models.SorulySearchResult
+import com.example.aniframe.data.models.SorulySearchResult
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import okhttp3.MediaType

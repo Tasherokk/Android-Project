@@ -1,4 +1,4 @@
-package com.example.aniframe.fragments
+package com.example.aniframe.ui.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -13,10 +13,10 @@ import androidx.room.Room
 import com.example.aniframe.R
 
 import com.example.aniframe.adapter.FavoritesAdapter
-import com.example.aniframe.database.KitsuDatabase
+import com.example.aniframe.data.database.KitsuDatabase
 import com.example.aniframe.databinding.FragmentFavoritesListBinding
-import com.example.aniframe.viewmodel.FavoritesListState
-import com.example.aniframe.viewmodel.FavoritesViewModel
+import com.example.aniframe.ui.viewmodel.FavoritesListState
+import com.example.aniframe.ui.viewmodel.FavoritesViewModel
 
 
 class FavoritesFragment : Fragment() {
@@ -59,6 +59,7 @@ class FavoritesFragment : Fragment() {
         val tagList = resources.getStringArray(R.array.tag_list).toList()
         adapter?.setTags(tagList)
 
+
         viewModel.favoritesListState.observe(viewLifecycleOwner) { state ->
             when (state) {
                 is FavoritesListState.Success -> adapter?.submitList(state.items)
@@ -71,7 +72,6 @@ class FavoritesFragment : Fragment() {
     private fun setupUI() {
         with(binding) {
             binding.kitsuList.adapter = adapter
-
             viewModel.fetchKitsuListDB()
         }
     }

@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.aniframe.databinding.ItemFavoritesBinding
-import com.example.aniframe.models.Kitsu
+import com.example.aniframe.data.models.Kitsu
 
 
 class FavoritesAdapter(private val onDeleteAnime: (Kitsu) -> Unit,

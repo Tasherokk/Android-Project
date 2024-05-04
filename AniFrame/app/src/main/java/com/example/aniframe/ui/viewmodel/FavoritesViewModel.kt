@@ -1,12 +1,13 @@
-package com.example.aniframe.viewmodel
+package com.example.aniframe.ui.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import com.example.aniframe.data.database.*
 import com.example.aniframe.database.*
-import com.example.aniframe.models.Kitsu
+import com.example.aniframe.data.models.Kitsu
 import kotlinx.coroutines.*
 
 class FavoritesViewModel(

@@ -16,12 +16,12 @@
         android:theme="@style/Theme.AniFrame"
         tools:targetApi="31">
         <service
-            android:name=".network.KitsuService"
+            android:name=".data.network.KitsuService"
             android:enabled="true"
             android:exported="true"></service>
 
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.activity.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

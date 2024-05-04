@@ -1,4 +1,4 @@
-package com.example.aniframe.database
+package com.example.aniframe.data.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
