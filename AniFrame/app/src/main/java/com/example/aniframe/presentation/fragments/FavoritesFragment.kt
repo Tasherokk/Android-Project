@@ -1,11 +1,10 @@
-package com.example.aniframe.ui.fragments
+package com.example.aniframe.presentation.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Spinner
 
 import androidx.lifecycle.ViewModelProvider
 
@@ -15,8 +14,8 @@ import com.example.aniframe.R
 import com.example.aniframe.adapter.FavoritesAdapter
 import com.example.aniframe.data.database.KitsuDatabase
 import com.example.aniframe.databinding.FragmentFavoritesListBinding
-import com.example.aniframe.ui.viewmodel.FavoritesListState
-import com.example.aniframe.ui.viewmodel.FavoritesViewModel
+import com.example.aniframe.presentation.viewmodel.FavoritesListState
+import com.example.aniframe.presentation.viewmodel.FavoritesViewModel
 
 
 class FavoritesFragment : Fragment() {

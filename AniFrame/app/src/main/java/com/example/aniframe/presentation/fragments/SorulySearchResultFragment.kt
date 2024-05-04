@@ -1,12 +1,10 @@
-package com.example.aniframe.ui.fragments
+package com.example.aniframe.presentation.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.bumptech.glide.Glide
-import com.example.aniframe.adapter.KitsuAdapter
 import com.example.aniframe.adapter.SorulyAdapter
 import com.example.aniframe.data.models.SorulySearchResult
 import com.example.aniframe.databinding.FragmentSorulySearchResultBinding
