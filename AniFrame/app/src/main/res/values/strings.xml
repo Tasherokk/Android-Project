@@ -2,4 +2,11 @@
     <string name="app_name">AniFrame</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="error_title">Backpack zholdorba</string>
+    <string name="error_message">Bul karta karta karta</string>
+    <string-array name="tag_list">
+        <item>Watching</item>
+        <item>Planning</item>
+        <item>Watched</item>
+    </string-array>
 </resources>

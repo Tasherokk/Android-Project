@@ -1,24 +1,27 @@
 package com.example.aniframe.adapter
 
+import android.R
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.Spinner
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.aniframe.databinding.ItemKitsuBinding
+import com.example.aniframe.databinding.ItemFavoritesBinding
 import com.example.aniframe.models.Kitsu
 
-class KitsuAdapter(
-        private val onSaveAnime:(Kitsu) -> Unit
-): ListAdapter<Kitsu, KitsuAdapter.ViewHolder>(KitsuItemCallback()) {
 
+class FavoritesAdapter(private val onDeleteAnime: (Kitsu) -> Unit,
+                       private val context: Context,
+        ): ListAdapter<Kitsu, FavoritesAdapter.ViewHolder>(KitsuItemCallback()) {
 
-
+    private var tagList: List<String> = emptyList()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            ItemKitsuBinding.inflate(
+                ItemFavoritesBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent, false
             )
@@ -31,12 +34,13 @@ class KitsuAdapter(
 
 
     inner class ViewHolder(
-        private val binding: ItemKitsuBinding
+        private val binding: ItemFavoritesBinding
     ): RecyclerView.ViewHolder(binding.root){
         fun bind(kitsu: Kitsu){
             with(binding){
                 val age = kitsu.attributes.ageRating
                 val poster = kitsu.attributes.posterImage.small
+                val spinner:Spinner = tagTitle
                 canonTitle.text = kitsu.attributes.canonicalTitle
                 createdAt.text = "Created Date: " + kitsu.attributes.createdAt
                 averageRating.text = kitsu.attributes.averageRating
@@ -44,12 +48,17 @@ class KitsuAdapter(
                 Glide.with(posterImage)
                     .load(poster)
                     .into(posterImage)
-                favorite.setOnClickListener{
-                    onSaveAnime(kitsu)
+                delete.setOnClickListener{
+                    onDeleteAnime(kitsu)
                 }
 
+                tagTitle.adapter = ArrayAdapter(context, R.layout.simple_spinner_item, tagList)
             }
         }
+    }
+    fun setTags(tags: List<String>){
+        tagList = tags
+        notifyDataSetChanged()
     }
 
     private class KitsuItemCallback: DiffUtil.ItemCallback<Kitsu>(){

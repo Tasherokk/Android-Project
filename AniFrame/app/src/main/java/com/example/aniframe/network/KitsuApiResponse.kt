@@ -1,10 +1,9 @@
 package com.example.aniframe.network
 
-import com.example.aniframe.models.Kitsu
-import java.util.Objects
+import KitsuApi
 
 data class KitsuApiResponse (
-    val data: List<Kitsu> = listOf(),
+    val data: List<KitsuApi>,
     val meta: Meta,
     val links: Link
 )

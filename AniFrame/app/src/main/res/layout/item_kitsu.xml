@@ -68,6 +68,12 @@
                 android:textStyle="bold"
                 tools:text="Age Rating" />
 
+            <Button
+                    android:id="@+id/favorite"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Favorite"/>
+
         </LinearLayout>
     </LinearLayout>
 
