@@ -1,4 +1,4 @@
-package com.example.aniframe.ui.viewmodel
+package com.example.aniframe.presentation.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.aniframe.data.database.*
-import com.example.aniframe.database.*
 import com.example.aniframe.data.models.Kitsu
 import kotlinx.coroutines.*
 

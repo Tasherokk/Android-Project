@@ -1,4 +1,4 @@
-package com.example.aniframe.ui.fragments
+package com.example.aniframe.presentation.fragments
 
 import com.example.aniframe.data.network.SorulySearchImageTask
 import android.content.Intent

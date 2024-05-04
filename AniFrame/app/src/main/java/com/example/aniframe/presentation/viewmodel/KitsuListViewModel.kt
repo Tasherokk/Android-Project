@@ -1,4 +1,4 @@
-package com.example.aniframe.ui.viewmodel
+package com.example.aniframe.presentation.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

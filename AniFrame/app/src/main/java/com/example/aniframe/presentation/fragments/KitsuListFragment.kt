@@ -1,4 +1,4 @@
-package com.example.aniframe.ui.fragments
+package com.example.aniframe.presentation.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -16,8 +16,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.room.Room
 import com.example.aniframe.R
 import com.example.aniframe.data.database.KitsuDatabase
-import com.example.aniframe.ui.viewmodel.KitsuListState
-import com.example.aniframe.ui.viewmodel.KitsuListViewModel
+import com.example.aniframe.presentation.viewmodel.KitsuListState
+import com.example.aniframe.presentation.viewmodel.KitsuListViewModel
 
 
 class KitsuListFragment : Fragment() {
