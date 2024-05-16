@@ -11,7 +11,7 @@ data class Kitsu (
 
 
 data class Attributes(
-    val createdAt: String,
+    val startDate: String,
     val canonicalTitle: String,
     val averageRating: String,
     val ageRating: AgeRating,

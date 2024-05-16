@@ -42,7 +42,7 @@ class FavoritesAdapter(private val onDeleteAnime: (Kitsu) -> Unit,
                 val poster = kitsu.attributes.posterImage.small
                 val spinner:Spinner = tagTitle
                 canonTitle.text = kitsu.attributes.canonicalTitle
-                createdAt.text = "Created Date: " + kitsu.attributes.createdAt
+                startDate.text = "Start Date: " + kitsu.attributes.startDate
                 averageRating.text = kitsu.attributes.averageRating
                 ageRating.text = age.toString()
                 Glide.with(posterImage)

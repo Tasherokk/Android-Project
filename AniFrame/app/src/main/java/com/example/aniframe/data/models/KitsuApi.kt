@@ -15,7 +15,7 @@ data class KitsuApi(
                 id = kitsuApi.id,
                 type = kitsuApi.type,
                 attributes = Attributes(
-                        createdAt = kitsuApi.attributes.createdAt,
+                        startDate = kitsuApi.attributes.startDate,
                         canonicalTitle = kitsuApi.attributes.canonicalTitle,
                         averageRating = kitsuApi.attributes.averageRating,
                         ageRating = kitsuApi.attributes.ageRating,
@@ -26,7 +26,7 @@ data class KitsuApi(
 }
 
 data class AttributesApi(
-    val createdAt: String,
+    val startDate: String,
     val canonicalTitle: String,
     val averageRating: String,
     val ageRating: AgeRating,

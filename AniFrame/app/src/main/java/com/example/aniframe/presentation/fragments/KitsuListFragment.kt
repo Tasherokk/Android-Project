@@ -13,6 +13,8 @@ import com.example.aniframe.databinding.FragmentKitsuListBinding
 import com.example.aniframe.data.models.Kitsu
 import com.example.aniframe.data.network.KitsuApiClient
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
 import com.example.aniframe.R
 import com.example.aniframe.data.database.KitsuDatabase
@@ -23,14 +25,14 @@ import com.example.aniframe.presentation.viewmodel.KitsuListViewModel
 class KitsuListFragment : Fragment() {
     private val viewModel: KitsuListViewModel by lazy {
         ViewModelProvider(
-                this,
-                KitsuListViewModel.Provider(
-                        service = KitsuApiClient.instance,
-                        dao = Room.databaseBuilder(
-                                requireContext().applicationContext,
-                                KitsuDatabase::class.java, "kitsudb"
-                        ).build().kitsuDao()
-                )
+            this,
+            KitsuListViewModel.Provider(
+                service = KitsuApiClient.instance,
+                dao = Room.databaseBuilder(
+                    requireContext().applicationContext,
+                    KitsuDatabase::class.java, "kitsudb"
+                ).build().kitsuDao()
+            )
         ).get<KitsuListViewModel>(KitsuListViewModel::class.java)
     }
 
@@ -53,9 +55,9 @@ class KitsuListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         adapter = KitsuAdapter(
-                onSaveAnime = {
-                    viewModel.saveAnime(it)
-                }
+            onSaveAnime = {
+                viewModel.saveAnime(it)
+            }
         )
         binding.kitsuList.adapter = adapter
 
@@ -67,20 +69,20 @@ class KitsuListFragment : Fragment() {
 
                 is KitsuListState.Error -> {
                     AlertDialog.Builder(requireContext())
-                            .setTitle(R.string.error_title)
-                            .setMessage(state.message ?: getString(R.string.error_message))
-                            .show()
+                        .setTitle(R.string.error_title)
+                        .setMessage(state.message ?: getString(R.string.error_message))
+                        .show()
                 }
                 is KitsuListState.SuccessAnimeSave -> Toast.makeText(requireContext(), "Success", Toast.LENGTH_SHORT).show()
                 else -> {}
             }
         }
-        binding.editText.addTextChangedListener {
-            val searchQuery = it.toString()
-            if (searchQuery != currentSearchQuery) {
-                currentSearchQuery = searchQuery
+        binding.searchButton.setOnClickListener {
+            val searchQuery = binding.searchEditText.text.toString()
+            if (searchQuery != viewModel.currentSearchQuery) {
+                viewModel.currentSearchQuery = searchQuery
                 if (searchQuery.isEmpty()) {
-                    adapter?.submitList(original)
+                    viewModel.fetchKitsuList()
                 } else {
                     viewModel.fetchKitsuByName(searchQuery)
                 }
@@ -95,7 +97,19 @@ class KitsuListFragment : Fragment() {
         binding.sortRating.setOnClickListener {
             viewModel.sortBy("averageRating")
         }
+        binding.kitsuList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                val layoutManager = recyclerView.layoutManager as LinearLayoutManager
+                val visibleItemCount = layoutManager.childCount
+                val totalItemCount = layoutManager.itemCount
+                val firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition()
+
+                if ((visibleItemCount + firstVisibleItemPosition) >= totalItemCount && firstVisibleItemPosition >= 0) {
+                    viewModel.loadMoreItems()
+                }
+            }
+        })
     }
 }
-
 

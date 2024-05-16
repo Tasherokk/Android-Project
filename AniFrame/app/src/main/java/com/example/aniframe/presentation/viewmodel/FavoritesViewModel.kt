@@ -50,10 +50,10 @@ class FavoritesViewModel(
         viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
             val posterImage = kitsu.attributes.posterImage
             val attributes = AttributesDB(
-                    createdAt = kitsu.attributes.createdAt,
+                    startDate = kitsu.attributes.startDate,
                     canonicalTitle = kitsu.attributes.canonicalTitle,
                     averageRating = kitsu.attributes.averageRating,
-                    ageRating = kitsu.attributes.ageRating.name,
+                    ageRating = kitsu.attributes.ageRating,
                     posterImage = PosterImageDB(
                             tiny = posterImage.tiny,
                             small = posterImage.small,

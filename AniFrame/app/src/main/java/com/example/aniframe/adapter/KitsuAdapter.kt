@@ -2,19 +2,17 @@ package com.example.aniframe.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Spinner
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.aniframe.R
 import com.example.aniframe.databinding.ItemKitsuBinding
 import com.example.aniframe.data.models.Kitsu
 
 class KitsuAdapter(
-        private val onSaveAnime:(Kitsu) -> Unit
-): ListAdapter<Kitsu, KitsuAdapter.ViewHolder>(KitsuItemCallback()) {
-
-
+    private val onSaveAnime: (Kitsu) -> Unit
+) : ListAdapter<Kitsu, KitsuAdapter.ViewHolder>(KitsuItemCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
@@ -29,30 +27,28 @@ class KitsuAdapter(
         holder.bind(getItem(position))
     }
 
-
     inner class ViewHolder(
         private val binding: ItemKitsuBinding
-    ): RecyclerView.ViewHolder(binding.root){
-        fun bind(kitsu: Kitsu){
-            with(binding){
+    ) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(kitsu: Kitsu) {
+            with(binding) {
                 val age = kitsu.attributes.ageRating
                 val poster = kitsu.attributes.posterImage.small
                 canonTitle.text = kitsu.attributes.canonicalTitle
-                createdAt.text = "Created Date: " + kitsu.attributes.createdAt
+                startDate.text = "Start Date: " + kitsu.attributes.startDate
                 averageRating.text = kitsu.attributes.averageRating
                 ageRating.text = age.toString()
-                Glide.with(posterImage)
+                Glide.with(posterImage.context)
                     .load(poster)
                     .into(posterImage)
-                favorite.setOnClickListener{
+                favorite.setOnClickListener {
                     onSaveAnime(kitsu)
                 }
-
             }
         }
     }
 
-    private class KitsuItemCallback: DiffUtil.ItemCallback<Kitsu>(){
+    private class KitsuItemCallback : DiffUtil.ItemCallback<Kitsu>() {
         override fun areItemsTheSame(oldItem: Kitsu, newItem: Kitsu): Boolean {
             return oldItem.id == newItem.id
         }
@@ -60,6 +56,5 @@ class KitsuAdapter(
         override fun areContentsTheSame(oldItem: Kitsu, newItem: Kitsu): Boolean {
             return oldItem == newItem
         }
-
     }
 }

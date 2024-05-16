@@ -45,7 +45,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/created_at"
+                android:id="@+id/start_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
