@@ -1,6 +1,7 @@
 package com.example.aniframe.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -12,19 +13,51 @@ import com.example.aniframe.data.models.Kitsu
 
 class KitsuAdapter(
     private val onSaveAnime: (Kitsu) -> Unit
-) : ListAdapter<Kitsu, KitsuAdapter.ViewHolder>(KitsuItemCallback()) {
+) : ListAdapter<Kitsu, RecyclerView.ViewHolder>(KitsuItemCallback()) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(
-            ItemKitsuBinding.inflate(
-                LayoutInflater.from(parent.context),
-                parent, false
-            )
-        )
+    companion object {
+        private const val VIEW_TYPE_ITEM = 0
+        private const val VIEW_TYPE_LOADING = 1
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(getItem(position))
+    private var isLoading = false
+
+    override fun getItemViewType(position: Int): Int {
+        return if (position == itemCount - 1 && isLoading) VIEW_TYPE_LOADING else VIEW_TYPE_ITEM
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        return if (viewType == VIEW_TYPE_ITEM) {
+            ViewHolder(
+                ItemKitsuBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent, false
+                )
+            )
+        } else {
+            LoadingViewHolder(
+                LayoutInflater.from(parent.context).inflate(R.layout.item_loading, parent, false)
+            )
+        }
+    }
+
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        if (holder is ViewHolder) {
+            holder.bind(getItem(position))
+        }
+    }
+
+    override fun getItemCount(): Int {
+        return super.getItemCount() + if (isLoading) 1 else 0
+    }
+
+    fun setLoading(isLoading: Boolean) {
+        this.isLoading = isLoading
+        if (isLoading) {
+            notifyItemInserted(itemCount - 1)
+        } else {
+            notifyItemRemoved(itemCount)
+        }
     }
 
     inner class ViewHolder(
@@ -48,13 +81,15 @@ class KitsuAdapter(
         }
     }
 
-    private class KitsuItemCallback : DiffUtil.ItemCallback<Kitsu>() {
-        override fun areItemsTheSame(oldItem: Kitsu, newItem: Kitsu): Boolean {
-            return oldItem.id == newItem.id
-        }
+    class LoadingViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+}
 
-        override fun areContentsTheSame(oldItem: Kitsu, newItem: Kitsu): Boolean {
-            return oldItem == newItem
-        }
+private class KitsuItemCallback : DiffUtil.ItemCallback<Kitsu>() {
+    override fun areItemsTheSame(oldItem: Kitsu, newItem: Kitsu): Boolean {
+        return oldItem.id == newItem.id
+    }
+
+    override fun areContentsTheSame(oldItem: Kitsu, newItem: Kitsu): Boolean {
+        return oldItem == newItem
     }
 }

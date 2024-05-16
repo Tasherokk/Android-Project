@@ -1,6 +1,7 @@
 package com.example.aniframe.presentation.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -61,11 +62,19 @@ class KitsuListFragment : Fragment() {
         )
         binding.kitsuList.adapter = adapter
 
+        observeViewModel()
         viewModel.fetchKitsuList()
 
         viewModel.kitsuListState.observe(viewLifecycleOwner) { state ->
             when (state) {
-                is KitsuListState.Success -> adapter?.submitList(state.items)
+
+                is KitsuListState.Loading -> {
+                }
+
+                is KitsuListState.Success -> {
+                    Log.e("items", "${state.items}")
+                    adapter?.submitList(state.items)
+                }
 
                 is KitsuListState.Error -> {
                     AlertDialog.Builder(requireContext())
@@ -73,7 +82,13 @@ class KitsuListFragment : Fragment() {
                         .setMessage(state.message ?: getString(R.string.error_message))
                         .show()
                 }
-                is KitsuListState.SuccessAnimeSave -> Toast.makeText(requireContext(), "Success", Toast.LENGTH_SHORT).show()
+
+                is KitsuListState.SuccessAnimeSave -> Toast.makeText(
+                    requireContext(),
+                    "Success",
+                    Toast.LENGTH_SHORT
+                ).show()
+
                 else -> {}
             }
         }
@@ -88,7 +103,7 @@ class KitsuListFragment : Fragment() {
                 }
             }
         }
-        binding.allButton.setOnClickListener{
+        binding.allButton.setOnClickListener {
             viewModel.fetchKitsuList()
         }
         binding.trending.setOnClickListener {
@@ -96,6 +111,9 @@ class KitsuListFragment : Fragment() {
         }
         binding.sortRating.setOnClickListener {
             viewModel.sortBy("averageRating")
+        }
+        viewModel.isLoadingMoreItems.observe(viewLifecycleOwner) { isLoading ->
+            adapter?.setLoading(isLoading)
         }
         binding.kitsuList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
@@ -109,7 +127,40 @@ class KitsuListFragment : Fragment() {
                     viewModel.loadMoreItems()
                 }
             }
-        })
+
+        }
+
+        )
+        class LoadingViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+    }
+
+    private fun observeViewModel() {
+        viewModel.kitsuListState.observe(viewLifecycleOwner) { state ->
+            when (state) {
+                is KitsuListState.Loading -> {
+                    // Show loading state if needed
+                }
+
+                is KitsuListState.Success -> {
+                    adapter?.submitList(state.items)
+                }
+
+                is KitsuListState.Error -> {
+                    AlertDialog.Builder(requireContext())
+                        .setTitle(R.string.error_title)
+                        .setMessage(state.message ?: getString(R.string.error_message))
+                        .show()
+                }
+
+                is KitsuListState.SuccessAnimeSave -> Toast.makeText(
+                    requireContext(),
+                    "Success",
+                    Toast.LENGTH_SHORT
+                ).show()
+
+                else -> {}
+            }
+        }
     }
 }
 

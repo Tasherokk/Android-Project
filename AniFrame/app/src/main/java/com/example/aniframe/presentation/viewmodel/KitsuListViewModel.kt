@@ -46,22 +46,21 @@ class KitsuListViewModel(
         _kitsuListState.value = KitsuListState.Loading(true)
 
         viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
-            val response = service.fetchKitsuList(10, 0)
+            val response = async { service.fetchKitsuList(10, 0) }
+            val kitsuList = response.await().data
             withContext(Dispatchers.Main) {
-                val kitsuList = response.data.map { KitsuApi.toKitsu(it) }
-                _loadedItems.clear()
-                _loadedItems.addAll(kitsuList)
-                _kitsuListState.value = KitsuListState.Success(_loadedItems)
-                _kitsuListState.value = KitsuListState.Loading(false)
+                _kitsuListState.value = KitsuListState.Success(kitsuList.map { KitsuApi.toKitsu(it) })
+                _kitsuListState.postValue(KitsuListState.Loading(false))
             }
         }
     }
-
+    private val _isLoadingMoreItems = MutableLiveData<Boolean>()
+    val isLoadingMoreItems: LiveData<Boolean> get() = _isLoadingMoreItems
     fun loadMoreItems() {
-
         if (isLoading) return
 
         isLoading = true
+        _isLoadingMoreItems.postValue(true)
         _kitsuListState.value = KitsuListState.Loading(true)
 
         viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
@@ -81,6 +80,7 @@ class KitsuListViewModel(
                     _kitsuListState.value = KitsuListState.Error(e.message)
                 }
             } finally {
+                _isLoadingMoreItems.postValue(false)
                 isLoading = false
             }
         }
@@ -118,8 +118,8 @@ class KitsuListViewModel(
         viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
             val response = async { service.fetchKitsuListByName(name) }
             withContext(Dispatchers.Main) {
-                _loadedItems.clear()
                 val kitsuList = response.await().data.map { KitsuApi.toKitsu(it) }
+                _loadedItems.clear()
                 _loadedItems.addAll(kitsuList)
                 _kitsuListState.value = KitsuListState.Success(_loadedItems)
                 _kitsuListState.value = KitsuListState.Loading(false)
