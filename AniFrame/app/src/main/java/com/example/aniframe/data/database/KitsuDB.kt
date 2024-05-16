@@ -14,16 +14,16 @@ data class KitsuDB(
 )
 
 data class AttributesDB(
-        @ColumnInfo(name = "created_at") val startDate: String,
-        @ColumnInfo(name = "canonical_title") val canonicalTitle: String,
-        @ColumnInfo(name = "average_rating") val averageRating: String,
-        @ColumnInfo(name = "age_rating") val ageRating: AgeRating,
+        @ColumnInfo(name = "created_at") val startDate: String?,
+        @ColumnInfo(name = "canonical_title") val canonicalTitle: String?,
+        @ColumnInfo(name = "average_rating") val averageRating: String?,
+        @ColumnInfo(name = "age_rating") val ageRating: AgeRating?,
         @Embedded val posterImage: PosterImageDB
 )
 
 data class PosterImageDB(
-        val tiny: String,
-        val small: String,
-        val large: String,
-        val original: String
+        val tiny: String?,
+        val small: String?,
+        val large: String?,
+        val original: String?
 )
