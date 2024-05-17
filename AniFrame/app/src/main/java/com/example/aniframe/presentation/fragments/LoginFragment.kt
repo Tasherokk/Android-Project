@@ -1,15 +1,13 @@
 package com.example.aniframe.presentation.fragments
 
 import android.os.Bundle
-import android.text.SpannableString
-import android.text.Spanned
-import android.text.style.ClickableSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
+import androidx.lifecycle.ViewModelProvider
 import com.example.aniframe.R
 import com.example.aniframe.data.database.AuthManager
 import com.example.aniframe.databinding.FragmentLoginBinding
@@ -41,8 +39,6 @@ class LoginFragment : Fragment() {
             replaceFragment(RegisterFragment())
         }
     }
-
-
     private fun handleLogin() {
         val username = binding.username.text.toString().trim()
         val password = binding.password.text.toString().trim()

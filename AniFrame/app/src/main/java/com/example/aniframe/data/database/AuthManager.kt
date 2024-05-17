@@ -28,4 +28,7 @@ class AuthManager(context: Context) {
         val storedPassword = userData.split("|")[1]
         return password == storedPassword
     }
+    fun getAuthToken(): String? {
+        return sharedPreferences.getString("auth_token", null)
+    }
 }
