@@ -33,6 +33,7 @@ class FavoritesFragment : Fragment() {
     private var _binding: FragmentFavoritesListBinding? = null
     private lateinit var authManager: AuthManager
 
+
     private val binding
         get() = _binding!!
 
@@ -66,8 +67,6 @@ class FavoritesFragment : Fragment() {
             logoutButton.setOnClickListener {
                 replaceFragment(LoginFragment())
                 authManager.clearAuthToken()
-
-
             }
             allButton.setOnClickListener{
                 viewModel.fetchKitsuListDB()
@@ -106,7 +105,6 @@ class FavoritesFragment : Fragment() {
             }
         }
     }
-
     private fun replaceFragment(fragment: Fragment) {
         parentFragmentManager.commit {
             replace(R.id.frame_layout, fragment)

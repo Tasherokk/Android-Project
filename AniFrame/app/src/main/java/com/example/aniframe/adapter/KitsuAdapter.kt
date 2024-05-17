@@ -8,12 +8,18 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.aniframe.R
+import com.example.aniframe.data.database.AuthManager
 import com.example.aniframe.databinding.ItemKitsuBinding
 import com.example.aniframe.data.models.Kitsu
 
 class KitsuAdapter(
-    private val onSaveAnime: (Kitsu) -> Unit
+    private val onSaveAnime: (Kitsu) -> Unit,
+    private val onLoginRequired: () -> Unit,
+    private var authManager: AuthManager
 ) : ListAdapter<Kitsu, RecyclerView.ViewHolder>(KitsuItemCallback()) {
+
+
+
 
     companion object {
         private const val VIEW_TYPE_ITEM = 0
@@ -60,9 +66,11 @@ class KitsuAdapter(
         }
     }
 
+
     inner class ViewHolder(
         private val binding: ItemKitsuBinding
     ) : RecyclerView.ViewHolder(binding.root) {
+
         fun bind(kitsu: Kitsu) {
             with(binding) {
                 val age = kitsu.attributes.ageRating
@@ -74,8 +82,12 @@ class KitsuAdapter(
                 Glide.with(posterImage.context)
                     .load(poster)
                     .into(posterImage)
-                favorite.setOnClickListener {
-                    onSaveAnime(kitsu)
+                favorite.setOnClickListener{
+                    if (authManager.isUserAuthenticated()) {
+                        onSaveAnime(kitsu)
+                     } else {
+                    onLoginRequired()
+                        }
                 }
             }
         }

@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.widget.addTextChangedListener
+import androidx.fragment.app.commit
 import com.example.aniframe.adapter.KitsuAdapter
 import com.example.aniframe.databinding.FragmentKitsuListBinding
 import com.example.aniframe.data.models.Kitsu
@@ -18,6 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
 import com.example.aniframe.R
+import com.example.aniframe.data.database.AuthManager
 import com.example.aniframe.data.database.KitsuDatabase
 import com.example.aniframe.presentation.viewmodel.KitsuListState
 import com.example.aniframe.presentation.viewmodel.KitsuListViewModel
@@ -36,7 +38,7 @@ class KitsuListFragment : Fragment() {
             )
         ).get<KitsuListViewModel>(KitsuListViewModel::class.java)
     }
-
+    private lateinit var authManager: AuthManager
     private var currentSearchQuery: String = ""
     private var original: List<Kitsu> = ArrayList()
     private var _binding: FragmentKitsuListBinding? = null
@@ -55,10 +57,15 @@ class KitsuListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         adapter = KitsuAdapter(
-            onSaveAnime = {
-                viewModel.saveAnime(it)
-            }
+                onSaveAnime = {
+                    viewModel.saveAnime(it)
+                },
+                onLoginRequired = {
+                    replaceFragment(LoginFragment())
+                },
+                authManager = AuthManager(requireContext())
         )
         binding.kitsuList.adapter = adapter
 
@@ -138,7 +145,6 @@ class KitsuListFragment : Fragment() {
         viewModel.kitsuListState.observe(viewLifecycleOwner) { state ->
             when (state) {
                 is KitsuListState.Loading -> {
-                    // Show loading state if needed
                 }
 
                 is KitsuListState.Success -> {
@@ -160,6 +166,12 @@ class KitsuListFragment : Fragment() {
 
                 else -> {}
             }
+        }
+    }
+    private fun replaceFragment(fragment: Fragment) {
+        parentFragmentManager.commit {
+            replace(R.id.frame_layout, fragment)
+            addToBackStack(null)
         }
     }
 }
