@@ -1,6 +1,7 @@
 # AniFrame
+<img src="assets/logoanime.jpg" alt="Logo" width="300"/>
 
-AniFrame is a mobile application designed for anime enthusiasts to discover, track, and manage their favorite anime series. With a sleek and intuitive interface, AniFrame provides users with a seamless experience for exploring the vast world of anime. The app features three main fragments: Anime List, Search, and Favorites. It integrates with the Kitsu API for anime data, utilizes Sorulysearch for efficient search functionality, and employs Room Database for managing favorite anime selections.
+AniFrame is a mobile application designed for anime enthusiasts to discover, track, and manage their favorite anime series. With a sleek and intuitive interface, AniFrame provides users with a seamless experience for exploring the vast world of anime. The app features three main fragments: Anime List, Search by fragment, and Favorites. It integrates with the Kitsu API for anime data, utilizes Sorulysearch for efficient search functionality, and employs Room Database for managing favorite anime selections.
 
 ## Table of Contents
 
@@ -69,8 +70,8 @@ AniFrame offers anime enthusiasts a comprehensive platform to discover, explore,
 
 - **Android Studio**
 - **Kotlin**
-- **Kitsu API**
-- **Sorulysearch**
+- **Kitsu API : https://hummingbird-me.github.io/api-docs/**
+- **Sorulysearch : https://github.com/soruly/trace.moe?tab=readme-ov-file**
 - **Room Database**
 - **SharedPreferences**
 - **MVVM Architecture**
