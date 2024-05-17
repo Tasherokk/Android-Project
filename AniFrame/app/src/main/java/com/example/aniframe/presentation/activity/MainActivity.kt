@@ -53,6 +53,8 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun replaceFragment(fragment: Fragment, addToBackStack: Boolean = false) {
+            supportFragmentManager.popBackStack()
+
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.frame_layout, fragment)
         if (addToBackStack) {

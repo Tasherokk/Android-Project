@@ -5,7 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.commit
+import androidx.fragment.app.replace
 import androidx.lifecycle.ViewModelProvider
 import androidx.room.Room
 import com.example.aniframe.R
@@ -106,11 +108,13 @@ class FavoritesFragment : Fragment() {
         }
     }
     private fun replaceFragment(fragment: Fragment) {
-        parentFragmentManager.commit {
-            replace(R.id.frame_layout, fragment)
-            addToBackStack(null)
-        }
+        parentFragmentManager.popBackStack()
+        parentFragmentManager.beginTransaction()
+                .replace(R.id.frame_layout, fragment)
+                .addToBackStack(null)
+                .commitAllowingStateLoss()
     }
+
 }
 
 

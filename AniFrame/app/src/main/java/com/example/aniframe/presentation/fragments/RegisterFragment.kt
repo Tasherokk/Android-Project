@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.commit
 import com.example.aniframe.R
 import com.example.aniframe.data.database.AuthManager
 import com.example.aniframe.databinding.FragmentRegisterBinding
@@ -52,6 +54,7 @@ class RegisterFragment : Fragment() {
             authManager.saveUser(username, email, password)
             Toast.makeText(requireContext(), "Registration successful", Toast.LENGTH_SHORT).show()
             replaceFragment(LoginFragment())
+
         }
     }
 
@@ -60,11 +63,11 @@ class RegisterFragment : Fragment() {
     }
 
     private fun replaceFragment(fragment: Fragment) {
+        parentFragmentManager.popBackStack()
         parentFragmentManager.beginTransaction()
                 .replace(R.id.frame_layout, fragment)
                 .addToBackStack(null)
-                .commit()
+                .commitAllowingStateLoss()
     }
-
 
 }

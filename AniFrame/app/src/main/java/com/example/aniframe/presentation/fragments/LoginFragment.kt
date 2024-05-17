@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.commit
 import androidx.lifecycle.ViewModelProvider
 import com.example.aniframe.R
@@ -48,16 +49,20 @@ class LoginFragment : Fragment() {
             authManager.saveAuthToken("sample_token")
             Toast.makeText(requireContext(), "Login successful", Toast.LENGTH_SHORT).show()
             replaceFragment(FavoritesFragment())
+
         } else {
             Toast.makeText(requireContext(), "Invalid username or password", Toast.LENGTH_SHORT).show()
         }
     }
 
     private fun replaceFragment(fragment: Fragment) {
-        parentFragmentManager.commit {
-            replace(R.id.frame_layout, fragment)
-            addToBackStack(null)
-        }
+
+        parentFragmentManager.popBackStack()
+        parentFragmentManager.beginTransaction()
+                .replace(R.id.frame_layout, fragment)
+                .addToBackStack(null)
+                .commitAllowingStateLoss()
+
     }
 
 }
