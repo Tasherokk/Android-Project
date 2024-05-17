@@ -12,7 +12,8 @@ import com.example.aniframe.databinding.ItemKitsuBinding
 import com.example.aniframe.data.models.Kitsu
 
 class KitsuAdapter(
-    private val onSaveAnime: (Kitsu) -> Unit
+    private val onSaveAnime: (Kitsu) -> Unit,
+    private val onDetailsClick: (Kitsu) -> Unit
 ) : ListAdapter<Kitsu, RecyclerView.ViewHolder>(KitsuItemCallback()) {
 
     companion object {
@@ -77,6 +78,10 @@ class KitsuAdapter(
                 favorite.setOnClickListener {
                     onSaveAnime(kitsu)
                 }
+                details.setOnClickListener {
+                    onDetailsClick(kitsu)
+                }
+
             }
         }
     }

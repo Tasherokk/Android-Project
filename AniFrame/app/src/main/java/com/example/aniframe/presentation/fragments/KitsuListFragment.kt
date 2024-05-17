@@ -1,24 +1,25 @@
 package com.example.aniframe.presentation.fragments
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import androidx.core.widget.addTextChangedListener
-import com.example.aniframe.adapter.KitsuAdapter
-import com.example.aniframe.databinding.FragmentKitsuListBinding
-import com.example.aniframe.data.models.Kitsu
-import com.example.aniframe.data.network.KitsuApiClient
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
 import com.example.aniframe.R
+import com.example.aniframe.adapter.KitsuAdapter
 import com.example.aniframe.data.database.KitsuDatabase
+import com.example.aniframe.data.models.Kitsu
+import com.example.aniframe.data.network.KitsuApiClient
+import com.example.aniframe.databinding.FragmentKitsuListBinding
 import com.example.aniframe.presentation.viewmodel.KitsuListState
 import com.example.aniframe.presentation.viewmodel.KitsuListViewModel
 
@@ -36,9 +37,8 @@ class KitsuListFragment : Fragment() {
             )
         ).get<KitsuListViewModel>(KitsuListViewModel::class.java)
     }
+    private lateinit var navController: NavController
 
-    private var currentSearchQuery: String = ""
-    private var original: List<Kitsu> = ArrayList()
     private var _binding: FragmentKitsuListBinding? = null
     private val binding
         get() = _binding!!
@@ -50,48 +50,30 @@ class KitsuListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentKitsuListBinding.inflate(layoutInflater, container, false)
+//        navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment)
         return _binding?.root
     }
 
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
         adapter = KitsuAdapter(
             onSaveAnime = {
                 viewModel.saveAnime(it)
+            },
+            onDetailsClick = {
+                handleOnDetailClick(it)
             }
+//
         )
         binding.kitsuList.adapter = adapter
 
         observeViewModel()
         viewModel.fetchKitsuList()
 
-        viewModel.kitsuListState.observe(viewLifecycleOwner) { state ->
-            when (state) {
-
-                is KitsuListState.Loading -> {
-                }
-
-                is KitsuListState.Success -> {
-                    Log.e("items", "${state.items}")
-                    adapter?.submitList(state.items)
-                }
-
-                is KitsuListState.Error -> {
-                    AlertDialog.Builder(requireContext())
-                        .setTitle(R.string.error_title)
-                        .setMessage(state.message ?: getString(R.string.error_message))
-                        .show()
-                }
-
-                is KitsuListState.SuccessAnimeSave -> Toast.makeText(
-                    requireContext(),
-                    "Success",
-                    Toast.LENGTH_SHORT
-                ).show()
-
-                else -> {}
-            }
-        }
         binding.searchButton.setOnClickListener {
             val searchQuery = binding.searchEditText.text.toString()
             if (searchQuery != viewModel.currentSearchQuery) {
@@ -131,7 +113,25 @@ class KitsuListFragment : Fragment() {
         }
 
         )
-        class LoadingViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+
+    }
+
+    private fun handleOnDetailClick(kitsu: Kitsu) {
+
+        val detailsFragment = KitsuDetailsFragment()
+
+        // Создание Bundle и передача данных
+        val bundle = Bundle().apply {
+            putInt("kitsuId", kitsu.id.toInt())  // Предполагается, что у объекта Kitsu есть поле id
+        }
+        detailsFragment.arguments = bundle
+
+        parentFragmentManager.beginTransaction()
+            .replace(R.id.frame_layout, detailsFragment)
+            .addToBackStack(null)
+            .commit()
+
+
     }
 
     private fun observeViewModel() {

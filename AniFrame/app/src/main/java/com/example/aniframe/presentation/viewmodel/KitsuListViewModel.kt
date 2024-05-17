@@ -65,8 +65,8 @@ class KitsuListViewModel(
 
         viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
             try {
-                val response = service.fetchKitsuList(itemsPerPage, currentOffset).data
-                val kitsuList = response.map { KitsuApi.toKitsu(it) }
+                val response =async { service.fetchKitsuList(itemsPerPage, currentOffset)}
+                val kitsuList = response.await().data.map { KitsuApi.toKitsu(it) }
                 currentOffset += itemsPerPage
 
                 _loadedItems.addAll(kitsuList)
@@ -117,12 +117,10 @@ class KitsuListViewModel(
 
         viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
             val response = async { service.fetchKitsuListByName(name) }
+            val kitsuList = response.await().data
             withContext(Dispatchers.Main) {
-                val kitsuList = response.await().data.map { KitsuApi.toKitsu(it) }
-                _loadedItems.clear()
-                _loadedItems.addAll(kitsuList)
-                _kitsuListState.value = KitsuListState.Success(_loadedItems)
-                _kitsuListState.value = KitsuListState.Loading(false)
+                _kitsuListState.value = KitsuListState.Success(kitsuList.map { KitsuApi.toKitsu(it) })
+                _kitsuListState.postValue(KitsuListState.Loading(false))
             }
         }
     }

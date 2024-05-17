@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp"
+    android:background="@color/background_color">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/content_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+
+            <!-- Poster Image -->
+            <ImageView
+                android:id="@+id/poster_image"
+                android:layout_width="200dp"
+                android:layout_height="300dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/poster_background"
+                android:elevation="8dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/baseline_image_24" />
+
+            <!-- Canonical Title -->
+            <TextView
+                android:id="@+id/canonical_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Title"
+                android:textAlignment="center"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textStyle="bold"
+                android:textColor="@color/title_color"
+                android:layout_marginBottom="8dp" />
+
+            <!-- Start Date -->
+            <TextView
+                android:id="@+id/start_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Start Date: 2020-01-01"
+                android:textAlignment="center"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/text_color"
+                android:layout_marginBottom="4dp" />
+
+            <!-- Average Rating -->
+            <TextView
+                android:id="@+id/average_rating"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Rating: 8.5"
+                android:textAlignment="center"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/text_color"
+                android:layout_marginBottom="4dp" />
+
+            <!-- Age Rating -->
+            <TextView
+                android:id="@+id/age_rating"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Age Rating: PG-13"
+                android:textAlignment="center"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/text_color"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Description -->
+            <TextView
+                android:id="@+id/description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Description"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/text_color"
+                android:background="@drawable/description_background"
+                android:padding="16dp"
+                android:layout_marginBottom="100dp"
+                android:elevation="4dp"/>
+        </LinearLayout>
+    </ScrollView>
+</FrameLayout>
