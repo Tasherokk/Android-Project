@@ -25,6 +25,7 @@ class FavoritesViewModel(
     }
 
     private val _favoritesListState = MutableLiveData<FavoritesListState>()
+    private val _loadedItems = mutableListOf<Kitsu>()
     val favoritesListState: LiveData<FavoritesListState> get() = _favoritesListState
 
     private val coroutineExceptionHandler =
@@ -97,23 +98,22 @@ class FavoritesViewModel(
         }
     }
     fun filterItemsByTag(tag: String) {
+        _favoritesListState.value = FavoritesListState.Loading(true)
+
         viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
             val response = async { kitsuDao.getAllByTag(tag) }
             val kitsuList = response.await()
             withContext(Dispatchers.Main) {
-                _favoritesListState.setValue(
-                        FavoritesListState.Success(
-                                kitsuList.map {
-                                    KitsuDbMapper(it)
-                                }
-                        )
-                )
+                _favoritesListState.value = FavoritesListState.Success(kitsuList.map { KitsuDbMapper(it) })
+                _favoritesListState.postValue( FavoritesListState.Loading(false))
             }
         }
     }
+
 }
 
 sealed class FavoritesListState {
+    data class Loading(val isLoading: Boolean) : FavoritesListState()
     data class Success(val items: List<Kitsu>) : FavoritesListState()
     data object SuccessAnimeSave: FavoritesListState()
     data class Error(val message: String? = null) : FavoritesListState()

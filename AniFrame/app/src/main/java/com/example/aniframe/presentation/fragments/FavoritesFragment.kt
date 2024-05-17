@@ -61,55 +61,44 @@ class FavoritesFragment : Fragment() {
                 },
                 requireContext()
         )
-//        binding.chipGroup.setOnCheckedChangeListener { chipGroup, checkedId ->
-//            when (checkedId) {
-////                R.id.chip_all -> {
-////                    viewModel.fetchKitsuListDB()
-////                }
-//                R.id.planning -> {
-//                    Filter("Planning")
-//                }
-//                R.id.completed -> {
-//                    Filter("Completed")
-//                }
-//                R.id.watching -> {
-//
-//                    Filter("Watching")
-//                }
-//
-//            }
-//        }
         setupUI()
+        AllObserve()
+        with(binding){
+            allButton.setOnClickListener{
+                viewModel.fetchKitsuListDB()
+            }
+            planning.setOnClickListener{
+                viewModel.filterItemsByTag("Planning")
 
+            }
+            watching.setOnClickListener{
+                viewModel.filterItemsByTag("Watching")
 
+            }
+            completed.setOnClickListener{
+                viewModel.filterItemsByTag("Completed")
 
-
-
-
-
-        viewModel.favoritesListState.observe(viewLifecycleOwner) { state ->
-            when (state) {
-                is FavoritesListState.Success -> adapter?.submitList(state.items)
-
-                else -> {}
             }
         }
 
     }
-    
-    private fun setTagAnime(kitsu: Kitsu, newTag: String){
-        viewModel.updateAnime(kitsu, newTag)
-    }
     private fun setupUI() {
         with(binding) {
-            binding.kitsuList.adapter = adapter
+            kitsuList.adapter = adapter
             viewModel.fetchKitsuListDB()
         }
     }
-    private fun Filter(tag: String){
-        with(binding){
-            binding.kitsuList.adapter = adapter
-            viewModel.filterItemsByTag(tag)
+    private fun AllObserve(){
+        viewModel.favoritesListState.observe(viewLifecycleOwner) { state ->
+            when (state) {
+                is FavoritesListState.Success -> adapter?.submitList(state.items)
+                is FavoritesListState.Error -> {
+                }
+                is FavoritesListState.Loading -> {
+                }
+
+                else -> {}
+            }
         }
     }
 }
