@@ -8,6 +8,7 @@ import com.example.aniframe.R
 import com.example.aniframe.databinding.ActivityMainBinding
 import com.example.aniframe.presentation.fragments.FavoritesFragment
 import com.example.aniframe.presentation.fragments.KitsuListFragment
+import com.example.aniframe.presentation.fragments.LoginFragment
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -29,7 +30,7 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.favorite -> {
-                    replaceFragment(FavoritesFragment())
+                    replaceFragment(LoginFragment())
                     true
                 }
                 else -> true
