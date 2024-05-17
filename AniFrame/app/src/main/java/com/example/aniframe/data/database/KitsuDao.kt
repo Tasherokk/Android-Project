@@ -11,6 +11,10 @@ interface KitsuDao {
     fun insertAll(kitsuList: List<KitsuDB>)
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(kitsu: KitsuDB)
+    @Update
+    fun updateKitsu(kitsu: KitsuDB)
     @Delete
     fun delete(kitsu: KitsuDB)
+    @Query("SELECT * FROM kitsudb WHERE tag = :tag")
+    fun getAllByTag(tag: String): List<KitsuDB>
 }

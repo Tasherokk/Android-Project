@@ -2,23 +2,36 @@ package com.example.aniframe.adapter
 
 import android.R
 import android.content.Context
+import android.content.SharedPreferences
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.aniframe.data.database.KitsuDB
+import com.example.aniframe.data.database.KitsuDao
 import com.example.aniframe.databinding.ItemFavoritesBinding
 import com.example.aniframe.data.models.Kitsu
 
 
 class FavoritesAdapter(private val onDeleteAnime: (Kitsu) -> Unit,
+                       private val onTagSelected: (Kitsu, String) -> Unit,
                        private val context: Context,
         ): ListAdapter<Kitsu, FavoritesAdapter.ViewHolder>(KitsuItemCallback()) {
 
-    private var tagList: List<String> = emptyList()
+    private val sharedPreferences: SharedPreferences =
+            context.getSharedPreferences("preferences", Context.MODE_PRIVATE)
+    private var tagList: List<String> = mutableListOf("Watching", "Completed", "Planning")
+    val dao: KitsuDao
+        get() {
+            TODO()
+        }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
                 ItemFavoritesBinding.inflate(
@@ -51,14 +64,37 @@ class FavoritesAdapter(private val onDeleteAnime: (Kitsu) -> Unit,
                 delete.setOnClickListener{
                     onDeleteAnime(kitsu)
                 }
+                val spinnerAdapter = ArrayAdapter(
+                        context,
+                        R.layout.simple_spinner_item,
+                        tagList
+                )
 
-                tagTitle.adapter = ArrayAdapter(context, R.layout.simple_spinner_item, tagList)
-            }
+                spinnerAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item)
+                spinner.adapter = spinnerAdapter
+
+                spinner.setSelection(getSavedTagPosition(kitsu.id))
+                spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                        val selectedTag = tagList[position]
+                        saveSelectedTag(kitsu.id, selectedTag)
+                        onTagSelected(kitsu, selectedTag)
+                        kitsu.tag = selectedTag
+                    }
+
+                    override fun onNothingSelected(parent: AdapterView<*>?) {}
+                }
+
+                }
         }
     }
-    fun setTags(tags: List<String>){
-        tagList = tags
-        notifyDataSetChanged()
+    private fun saveSelectedTag(kitsuId: String, tag: String) {
+        sharedPreferences.edit().putString("selected_tag_$kitsuId", tag).apply()
+    }
+
+    private fun getSavedTagPosition(kitsuId: String): Int {
+        val savedTag = sharedPreferences.getString("selected_tag_$kitsuId", "Planning") ?: "Planning"
+        return tagList.indexOf(savedTag)
     }
 
     private class KitsuItemCallback: DiffUtil.ItemCallback<Kitsu>(){

@@ -23,39 +23,40 @@
             android:padding="10dp"
             />
 
+    <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chipGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            >
+        <com.google.android.material.chip.Chip
+            android:id="@+id/planning"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/Widget.MaterialComponents.Chip.Filter"
+            android:text="Planning"
+            />
 
-
-        <RadioGroup
-                android:layout_width="match_parent"
+        <com.google.android.material.chip.Chip
+                android:id="@+id/watching"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-            <RadioButton
-                    android:id="@+id/watching"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Watching" />
-            <View
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="1" />
-            <RadioButton
-                    android:id="@+id/planning"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Planning" />
-            <View
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="1" />
-            <RadioButton
-                    android:id="@+id/watched"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Watched" />
-        </RadioGroup>
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:text="Watching"
+                />
+
+        <com.google.android.material.chip.Chip
+                android:id="@+id/completed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:text="Completed"
+                />
+
+    </com.google.android.material.chip.ChipGroup>
 
 
-    </LinearLayout>
+</LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/kitsu_list"

@@ -81,13 +81,16 @@
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_weight="1" />
-
             <Spinner
                     android:id="@+id/tag_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/spinner_background"
+                    android:popupBackground="@drawable/spinner_popup_background"
+                    android:padding="8dp"
+                    android:layout_marginRight="12dp"/>
 
-                    />
+
 
         </LinearLayout>
 
