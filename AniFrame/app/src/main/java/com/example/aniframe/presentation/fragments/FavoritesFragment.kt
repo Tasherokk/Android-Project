@@ -1,24 +1,20 @@
 package com.example.aniframe.presentation.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.commit
 import androidx.lifecycle.ViewModelProvider
-
 import androidx.room.Room
 import com.example.aniframe.R
-
 import com.example.aniframe.adapter.FavoritesAdapter
+import com.example.aniframe.data.database.AuthManager
 import com.example.aniframe.data.database.KitsuDatabase
-import com.example.aniframe.data.models.Kitsu
 import com.example.aniframe.databinding.FragmentFavoritesListBinding
 import com.example.aniframe.presentation.viewmodel.FavoritesListState
 import com.example.aniframe.presentation.viewmodel.FavoritesViewModel
-import com.google.android.material.chip.Chip
-import com.google.android.material.chip.ChipGroup
 
 
 class FavoritesFragment : Fragment() {
@@ -35,6 +31,8 @@ class FavoritesFragment : Fragment() {
     }
 
     private var _binding: FragmentFavoritesListBinding? = null
+    private lateinit var authManager: AuthManager
+
     private val binding
         get() = _binding!!
 
@@ -51,6 +49,7 @@ class FavoritesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        authManager = AuthManager(requireContext())
         adapter = FavoritesAdapter(
                 onDeleteAnime = {
                     viewModel.deleteAnime(it)
@@ -64,6 +63,12 @@ class FavoritesFragment : Fragment() {
         setupUI()
         AllObserve()
         with(binding){
+            logoutButton.setOnClickListener {
+                replaceFragment(LoginFragment())
+                authManager.clearAuthToken()
+
+
+            }
             allButton.setOnClickListener{
                 viewModel.fetchKitsuListDB()
             }
@@ -99,6 +104,13 @@ class FavoritesFragment : Fragment() {
 
                 else -> {}
             }
+        }
+    }
+
+    private fun replaceFragment(fragment: Fragment) {
+        parentFragmentManager.commit {
+            replace(R.id.frame_layout, fragment)
+            addToBackStack(null)
         }
     }
 }
