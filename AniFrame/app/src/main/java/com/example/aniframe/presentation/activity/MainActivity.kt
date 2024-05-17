@@ -52,11 +52,13 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    private fun replaceFragment(fragment: Fragment) {
-        supportFragmentManager
-            .beginTransaction()
-            .replace(R.id.frame_layout, fragment)
-            .commit()
+    private fun replaceFragment(fragment: Fragment, addToBackStack: Boolean = false) {
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.frame_layout, fragment)
+        if (addToBackStack) {
+            transaction.addToBackStack(null)
+        }
+        transaction.commit()
     }
     private fun isUserLoggedIn(): Boolean {
         val authToken = authManager.getAuthToken()

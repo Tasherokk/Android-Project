@@ -65,7 +65,11 @@ class KitsuListFragment : Fragment() {
                 onLoginRequired = {
                     replaceFragment(LoginFragment())
                 },
-                authManager = AuthManager(requireContext())
+                authManager = AuthManager(requireContext()),
+                onDetailsClick = {
+                handleOnDetailClick(it)
+            }
+
         )
         binding.kitsuList.adapter = adapter
 
@@ -173,6 +177,23 @@ class KitsuListFragment : Fragment() {
             replace(R.id.frame_layout, fragment)
             addToBackStack(null)
         }
+    }
+    private fun handleOnDetailClick(kitsu: Kitsu) {
+
+        val detailsFragment = KitsuDetailsFragment()
+
+        // Создание Bundle и передача данных
+        val bundle = Bundle().apply {
+            putInt("kitsuId", kitsu.id.toInt())  // Предполагается, что у объекта Kitsu есть поле id
+        }
+        detailsFragment.arguments = bundle
+
+        parentFragmentManager.beginTransaction()
+            .replace(R.id.frame_layout, detailsFragment)
+            .addToBackStack(null)
+            .commit()
+
+
     }
 }
 

@@ -15,7 +15,8 @@ import com.example.aniframe.data.models.Kitsu
 class KitsuAdapter(
     private val onSaveAnime: (Kitsu) -> Unit,
     private val onLoginRequired: () -> Unit,
-    private var authManager: AuthManager
+    private var authManager: AuthManager,
+    private val onDetailsClick: (Kitsu) -> Unit,
 ) : ListAdapter<Kitsu, RecyclerView.ViewHolder>(KitsuItemCallback()) {
 
 
@@ -88,6 +89,9 @@ class KitsuAdapter(
                      } else {
                     onLoginRequired()
                         }
+                }
+                details.setOnClickListener {
+                    onDetailsClick(kitsu)
                 }
             }
         }
