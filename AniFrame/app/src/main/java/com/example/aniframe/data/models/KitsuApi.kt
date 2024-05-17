@@ -1,13 +1,11 @@
-import com.example.aniframe.data.models.AgeRating
-import com.example.aniframe.data.models.Attributes
-import com.example.aniframe.data.models.Kitsu
-import com.example.aniframe.data.models.PosterImage
+import com.example.aniframe.data.models.*
 
 
 data class KitsuApi(
         val id: String,
         val type: String,
-        val attributes: AttributesApi
+        val attributes: AttributesApi,
+        var tag: String? = null
 ) {
 
     companion object {

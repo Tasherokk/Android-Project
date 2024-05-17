@@ -5,12 +5,14 @@ import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.example.aniframe.data.models.AgeRating
+import com.example.aniframe.data.models.Tag
 
 @Entity(tableName = "kitsudb")
 data class KitsuDB(
         @PrimaryKey val id: String,
         val type: String,
-        @Embedded val attributes: AttributesDB
+        @Embedded val attributes: AttributesDB,
+        var tag: String? = null
 )
 
 data class AttributesDB(

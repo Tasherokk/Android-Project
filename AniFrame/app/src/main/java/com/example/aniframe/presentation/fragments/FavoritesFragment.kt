@@ -13,9 +13,12 @@ import com.example.aniframe.R
 
 import com.example.aniframe.adapter.FavoritesAdapter
 import com.example.aniframe.data.database.KitsuDatabase
+import com.example.aniframe.data.models.Kitsu
 import com.example.aniframe.databinding.FragmentFavoritesListBinding
 import com.example.aniframe.presentation.viewmodel.FavoritesListState
 import com.example.aniframe.presentation.viewmodel.FavoritesViewModel
+import com.google.android.material.chip.Chip
+import com.google.android.material.chip.ChipGroup
 
 
 class FavoritesFragment : Fragment() {
@@ -37,6 +40,7 @@ class FavoritesFragment : Fragment() {
 
     private var adapter: FavoritesAdapter? = null
 
+
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
@@ -52,11 +56,35 @@ class FavoritesFragment : Fragment() {
                     viewModel.deleteAnime(it)
                     setupUI()
                 },
+                onTagSelected = { kitsu, newTag ->
+                    viewModel.updateAnime(kitsu, newTag)
+                },
                 requireContext()
         )
+//        binding.chipGroup.setOnCheckedChangeListener { chipGroup, checkedId ->
+//            when (checkedId) {
+////                R.id.chip_all -> {
+////                    viewModel.fetchKitsuListDB()
+////                }
+//                R.id.planning -> {
+//                    Filter("Planning")
+//                }
+//                R.id.completed -> {
+//                    Filter("Completed")
+//                }
+//                R.id.watching -> {
+//
+//                    Filter("Watching")
+//                }
+//
+//            }
+//        }
         setupUI()
-        val tagList = resources.getStringArray(R.array.tag_list).toList()
-        adapter?.setTags(tagList)
+
+
+
+
+
 
 
         viewModel.favoritesListState.observe(viewLifecycleOwner) { state ->
@@ -68,10 +96,20 @@ class FavoritesFragment : Fragment() {
         }
 
     }
+    
+    private fun setTagAnime(kitsu: Kitsu, newTag: String){
+        viewModel.updateAnime(kitsu, newTag)
+    }
     private fun setupUI() {
         with(binding) {
             binding.kitsuList.adapter = adapter
             viewModel.fetchKitsuListDB()
+        }
+    }
+    private fun Filter(tag: String){
+        with(binding){
+            binding.kitsuList.adapter = adapter
+            viewModel.filterItemsByTag(tag)
         }
     }
 }
