@@ -11,8 +11,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_gravity="center"
-        >
+        android:layout_gravity="center">
+    <Button
+            android:id="@+id/logout_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Logout"
+            android:layout_gravity="center" />
+
+
     <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -22,40 +29,48 @@
             android:textSize="20sp"
             android:padding="10dp"
             />
+    <Button
+            android:id="@+id/all_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="All Favorites"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
+           />
 
-
-
-        <RadioGroup
-                android:layout_width="match_parent"
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp">
+        <Button
+                android:id="@+id/planning"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-            <RadioButton
-                    android:id="@+id/watching"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Watching" />
-            <View
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="1" />
-            <RadioButton
-                    android:id="@+id/planning"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Planning" />
-            <View
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="1" />
-            <RadioButton
-                    android:id="@+id/watched"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Watched" />
-        </RadioGroup>
+                android:text="Planning"/>
 
+        <Button
+                android:id="@+id/watching"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Watching"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"/>
+
+        <Button
+                android:id="@+id/completed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Completed"/>
 
     </LinearLayout>
+
+
+
+
+
+</LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/kitsu_list"
