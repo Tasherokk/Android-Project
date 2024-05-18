@@ -94,11 +94,13 @@ class KitsuListFragment : Fragment() {
                         .show()
                 }
 
-                is KitsuListState.SuccessAnimeSave -> Toast.makeText(
-                    requireContext(),
-                    "Success",
-                    Toast.LENGTH_SHORT
-                ).show()
+                is KitsuListState.SuccessAnimeSave -> {
+                    Toast.makeText(requireContext(), "Success", Toast.LENGTH_SHORT).show()
+                }
+                is KitsuListState.AlreadySavedAnime -> {
+                    Toast.makeText(requireContext(), "Already saved", Toast.LENGTH_SHORT).show()
+                }
+
 
                 else -> {}
             }
@@ -161,13 +163,6 @@ class KitsuListFragment : Fragment() {
                         .setMessage(state.message ?: getString(R.string.error_message))
                         .show()
                 }
-
-                is KitsuListState.SuccessAnimeSave -> Toast.makeText(
-                    requireContext(),
-                    "Success",
-                    Toast.LENGTH_SHORT
-                ).show()
-
                 else -> {}
             }
         }

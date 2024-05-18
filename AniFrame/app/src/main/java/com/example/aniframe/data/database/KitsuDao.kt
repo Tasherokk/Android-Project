@@ -17,4 +17,5 @@ interface KitsuDao {
     fun delete(kitsu: KitsuDB)
     @Query("SELECT * FROM kitsudb WHERE tag = :tag")
     fun getAllByTag(tag: String): List<KitsuDB>
+
 }

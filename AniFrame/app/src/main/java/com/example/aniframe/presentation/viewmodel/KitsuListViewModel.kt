@@ -1,6 +1,5 @@
 package com.example.aniframe.presentation.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -11,7 +10,6 @@ import com.example.aniframe.data.database.KitsuDB
 import com.example.aniframe.data.database.KitsuDao
 import com.example.aniframe.data.database.PosterImageDB
 import com.example.aniframe.data.models.Kitsu
-import com.example.aniframe.data.network.KitsuApiResponse
 import com.example.aniframe.data.network.KitsuService
 import kotlinx.coroutines.*
 class KitsuListViewModel(
@@ -145,10 +143,17 @@ class KitsuListViewModel(
                 type = kitsu.type,
                 attributes = attributes
             )
-            kitsuDao.insert(kitsuDB)
-            _kitsuListState.postValue(KitsuListState.SuccessAnimeSave)
+            if (kitsuDao.getAll().contains(kitsuDB)){
+                _kitsuListState.postValue(KitsuListState.AlreadySavedAnime)
+            }
+            else{
+                kitsuDao.insert(kitsuDB)
+                _kitsuListState.postValue(KitsuListState.SuccessAnimeSave)
+            }
+
         }
     }
+
 }
 
 sealed class KitsuListState {
@@ -156,4 +161,5 @@ sealed class KitsuListState {
     data class Success(val items: List<Kitsu>) : KitsuListState()
     data class Error(val message: String? = null) : KitsuListState()
     data object SuccessAnimeSave: KitsuListState()
+    data object AlreadySavedAnime: KitsuListState()
 }
