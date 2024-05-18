@@ -53,6 +53,7 @@ class FavoritesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         authManager = AuthManager(requireContext())
+        val tagList = resources.getStringArray(R.array.tag_list).toList()
         adapter = FavoritesAdapter(
                 onDeleteAnime = {
                     viewModel.deleteAnime(it)
@@ -61,7 +62,8 @@ class FavoritesFragment : Fragment() {
                 onTagSelected = { kitsu, newTag ->
                     viewModel.updateAnime(kitsu, newTag)
                 },
-                requireContext()
+                requireContext(),
+                tagList = tagList
         )
         setupUI()
         AllObserve()
