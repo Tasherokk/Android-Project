@@ -58,7 +58,7 @@
             android:layout_weight="1"
             android:text="All"
             android:fontFamily="@font/font2"
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:backgroundTint="@color/blue"
             style="@style/TextAppearance.AppCompat.Widget.Button.Colored" />
 
@@ -73,7 +73,7 @@
             android:layout_weight="1"
             android:text="Trending"
             android:fontFamily="@font/font2"
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:backgroundTint="@color/blue"
             style="@style/TextAppearance.AppCompat.Widget.Button.Colored" />
     </LinearLayout>

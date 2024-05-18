@@ -43,8 +43,6 @@ class KitsuDetailsViewModel(
                 _kitsuDetailsState.value = KitsuDetailsState.Success(kitsuList)
                 _kitsuDetailsState.postValue(KitsuDetailsState.Loading(false))
             }
-//            _kitsuDetailsState.value = KitsuDetailsState.Success(kitsuDetails.getKitsu())
-//            _kitsuDetailsState.value = KitsuDetailsState.Loading(false)
         }
     }
 }

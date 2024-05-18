@@ -38,9 +38,7 @@ class KitsuListFragment : Fragment() {
             )
         ).get<KitsuListViewModel>(KitsuListViewModel::class.java)
     }
-    private lateinit var authManager: AuthManager
-    private var currentSearchQuery: String = ""
-    private var original: List<Kitsu> = ArrayList()
+
     private var _binding: FragmentKitsuListBinding? = null
     private val binding
         get() = _binding!!
@@ -180,14 +178,11 @@ class KitsuListFragment : Fragment() {
 
         // Создание Bundle и передача данных
         val bundle = Bundle().apply {
-            putInt("kitsuId", kitsu.id.toInt())  // Предполагается, что у объекта Kitsu есть поле id
+            putInt("kitsuId", kitsu.id.toInt())
         }
         detailsFragment.arguments = bundle
 
-        parentFragmentManager.beginTransaction()
-            .replace(R.id.frame_layout, detailsFragment)
-            .addToBackStack(null)
-            .commit()
+        replaceFragment(detailsFragment)
 
 
     }
