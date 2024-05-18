@@ -19,7 +19,9 @@ import com.example.aniframe.databinding.ItemFavoritesBinding
 import com.example.aniframe.data.models.Kitsu
 
 
-class FavoritesAdapter(private val onDeleteAnime: (Kitsu) -> Unit,
+class FavoritesAdapter(
+                        private val onDetailClick: (Kitsu) -> Unit,
+                        private val onDeleteAnime: (Kitsu) -> Unit,
                        private val onTagSelected: (Kitsu, String) -> Unit,
                        private val context: Context,
                        private val tagList: List<String>
@@ -51,6 +53,9 @@ class FavoritesAdapter(private val onDeleteAnime: (Kitsu) -> Unit,
     ): RecyclerView.ViewHolder(binding.root){
         fun bind(kitsu: Kitsu){
             with(binding){
+                details.setOnClickListener {
+                    onDetailClick(kitsu)
+                }
                 val spinner:Spinner = tagTitle
                 val poster = kitsu.attributes.posterImage.small
                 canonTitle.text = kitsu.attributes.canonicalTitle

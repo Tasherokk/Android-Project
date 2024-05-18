@@ -13,7 +13,10 @@ import androidx.room.Room
 import com.example.aniframe.R
 import com.example.aniframe.adapter.FavoritesAdapter
 import com.example.aniframe.data.database.AuthManager
+import com.example.aniframe.data.database.KitsuDB
 import com.example.aniframe.data.database.KitsuDatabase
+import com.example.aniframe.data.database.KitsuDbMapper
+import com.example.aniframe.data.models.Kitsu
 import com.example.aniframe.databinding.FragmentFavoritesListBinding
 import com.example.aniframe.presentation.viewmodel.FavoritesListState
 import com.example.aniframe.presentation.viewmodel.FavoritesViewModel
@@ -55,6 +58,9 @@ class FavoritesFragment : Fragment() {
         authManager = AuthManager(requireContext())
         val tagList = resources.getStringArray(R.array.tag_list).toList()
         adapter = FavoritesAdapter(
+                onDetailClick = {
+                    handleOnDetailClick(it)
+                },
                 onDeleteAnime = {
                     viewModel.deleteAnime(it)
                     setupUI()
@@ -67,7 +73,7 @@ class FavoritesFragment : Fragment() {
         )
         setupUI()
         AllObserve()
-        with(binding){
+        with(binding) {
             logoutButton.setOnClickListener {
                 replaceFragment(LoginFragment())
                 authManager.clearAuthToken()
@@ -115,6 +121,22 @@ class FavoritesFragment : Fragment() {
                 .replace(R.id.frame_layout, fragment)
                 .addToBackStack(null)
                 .commitAllowingStateLoss()
+    }
+
+
+    private fun handleOnDetailClick(kitsu: Kitsu) {
+
+        val detailsFragment = KitsuDetailsFragment()
+
+        // Создание Bundle и передача данных
+        val bundle = Bundle().apply {
+            putInt("kitsuId", kitsu.id.toInt())
+        }
+        detailsFragment.arguments = bundle
+
+        replaceFragment(detailsFragment)
+
+
     }
 
 }
