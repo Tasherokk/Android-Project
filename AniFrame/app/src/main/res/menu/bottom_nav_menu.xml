@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:title="Kitsu"
+    <item android:title="List"
         android:icon="@drawable/search"
         android:id="@+id/kitsu" />
 
-    <item android:title="Soruly"
+    <item android:title="Frame Search"
         android:icon="@drawable/photo"
         android:id="@+id/soruly"/>
 
-    <item android:title="Favorite"
+    <item android:title="Favorites"
         android:icon="@drawable/favs"
         android:id="@+id/favorite"/>
 
