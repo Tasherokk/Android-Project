@@ -22,11 +22,11 @@ import com.example.aniframe.data.models.Kitsu
 class FavoritesAdapter(private val onDeleteAnime: (Kitsu) -> Unit,
                        private val onTagSelected: (Kitsu, String) -> Unit,
                        private val context: Context,
+                       private val tagList: List<String>
         ): ListAdapter<Kitsu, FavoritesAdapter.ViewHolder>(KitsuItemCallback()) {
 
     private val sharedPreferences: SharedPreferences =
             context.getSharedPreferences("preferences", Context.MODE_PRIVATE)
-    private var tagList: List<String> = mutableListOf("Watching", "Completed", "Planning")
     val dao: KitsuDao
         get() {
             TODO()

@@ -1,4 +1,5 @@
 # AniFrame
+
 <img src="assets/logoanime.jpg" alt="Logo" width="300"/>
 
 AniFrame is a mobile application designed for anime enthusiasts to discover, track, and manage their favorite anime series. With a sleek and intuitive interface, AniFrame provides users with a seamless experience for exploring the vast world of anime. The app features three main fragments: Anime List, Search by fragment, and Favorites. It integrates with the Kitsu API for anime data, utilizes Sorulysearch for efficient search functionality, and employs Room Database for managing favorite anime selections.
@@ -35,6 +36,16 @@ AniFrame offers anime enthusiasts a comprehensive platform to discover, explore,
 - **Retrofit:** Using Retrofit for efficient and easy-to-use HTTP client for Android.
 
 ## Screenshots
+<div style="display: inline-block;">
+  <img src="assets/main.png" alt="Main" width="300"/>
+  <img src="assets/search.png" alt="Search" width="300"/>
+  <img src="assets/favorites_profile.png" alt="Favorites Profile" width="300"/>
+  <img src="assets/details.png" alt="Details" width="300"/>
+  <img src="assets/search_result.png" alt="Details" width="300"/>
+  <img src="assets/login.png" alt="Details" width="300"/>
+  <img src="assets/register.png" alt="Details" width="300"/>
+</div>
+
 
 
 ## Getting Started
@@ -55,7 +66,7 @@ AniFrame offers anime enthusiasts a comprehensive platform to discover, explore,
 
 2. **Open the project in Android Studio.**
 3. **Build and run the project on your device or emulator.**
-4. **APK: link**
+
 
 ## Usage
 
