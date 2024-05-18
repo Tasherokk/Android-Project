@@ -66,7 +66,7 @@ AniFrame offers anime enthusiasts a comprehensive platform to discover, explore,
 
 2. **Open the project in Android Studio.**
 3. **Build and run the project on your device or emulator.**
-4. **APK: link**
+
 
 ## Usage
 
