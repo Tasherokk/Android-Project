@@ -90,7 +90,7 @@ class FavoritesFragment : Fragment() {
 
             }
             completed.setOnClickListener{
-                viewModel.filterItemsByTag("Completed")
+                viewModel.filterItemsByTag("Watched")
 
             }
         }
