@@ -5,6 +5,7 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:orientation="vertical"
+    android:background="@color/material_dynamic_primary99"
               tools:context=".presentation.fragments.KitsuListFragment"
         android:padding="16dp">
 <LinearLayout
@@ -17,7 +18,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Logout"
-            android:layout_gravity="center" />
+            android:layout_gravity="center"
+        android:fontFamily="@font/font2"
+        android:textSize="20dp"
+        android:backgroundTint="@color/design_default_color_error"
+        style="@style/TextAppearance.AppCompat.Widget.Button.Colored"
+        />
 
 
     <TextView
@@ -36,6 +42,10 @@
             android:text="All Favorites"
             android:layout_gravity="center"
             android:layout_marginBottom="10dp"
+        android:fontFamily="@font/font2"
+        android:textSize="20dp"
+        android:backgroundTint="@color/blue"
+        style="@style/TextAppearance.AppCompat.Widget.Button.Colored"
            />
 
     <LinearLayout
@@ -43,12 +53,18 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_gravity="center"
+
             android:layout_marginBottom="10dp">
         <Button
                 android:id="@+id/planning"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Planning"/>
+                android:text="Planning"
+
+            android:fontFamily="@font/font2"
+            android:textSize="16dp"
+            android:backgroundTint="@color/blue"
+            style="@style/TextAppearance.AppCompat.Widget.Button.Colored"/>
 
         <Button
                 android:id="@+id/watching"
@@ -56,13 +72,21 @@
                 android:layout_height="wrap_content"
                 android:text="Watching"
                 android:layout_marginRight="10dp"
-                android:layout_marginLeft="10dp"/>
+                android:layout_marginLeft="10dp"
+            android:fontFamily="@font/font2"
+            android:textSize="16dp"
+            android:backgroundTint="@color/blue"
+            style="@style/TextAppearance.AppCompat.Widget.Button.Colored"/>
 
         <Button
                 android:id="@+id/completed"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Completed"/>
+                android:text="Completed"
+            android:fontFamily="@font/font2"
+            android:textSize="16dp"
+            android:backgroundTint="@color/blue"
+            style="@style/TextAppearance.AppCompat.Widget.Button.Colored"/>
 
     </LinearLayout>
 

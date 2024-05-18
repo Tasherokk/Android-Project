@@ -29,9 +29,11 @@
                         android:id="@+id/canon_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textStyle="bold"
-                        android:textSize="18sp"
+                    android:fontFamily="@font/font1"
+                    android:textColor="@color/title_color"
+                        android:textSize="28sp"
                         tools:text="canon_title"
+
                         android:padding="6dp"/>
 
 
@@ -40,21 +42,27 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="8dp"
-                        android:textSize="14sp"
+                        android:textSize="16sp"
+                    android:fontFamily="@font/font2"
+                    android:textColor="@color/detail_text_color"
                         tools:text="created_at"
                         android:padding="6dp"/>
                 <TextView
                         android:id="@+id/average_rating"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="14sp"
+                        android:textSize="16sp"
+                    android:fontFamily="@font/font2"
+                    android:textColor="@color/detail_text_color"
                         tools:text="average_rating"
                         android:padding="6dp"/>
                 <TextView
                         android:id="@+id/age_rating"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="14sp"
+                        android:textSize="16sp"
+                    android:fontFamily="@font/font2"
+                    android:textColor="@color/detail_text_color"
                         tools:text="age_rating"
                         android:padding="6dp"/>
 
@@ -75,7 +83,11 @@
                     android:id="@+id/delete"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Delete"/>
+                    android:text="Delete"
+                android:textSize="24sp"
+                android:fontFamily="@font/font2"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/design_default_color_error"/>
 
             <View
                     android:layout_width="0dp"
@@ -88,6 +100,8 @@
                     android:background="@drawable/spinner_background"
                     android:popupBackground="@drawable/spinner_popup_background"
                     android:padding="8dp"
+                android:fontFamily="@font/font2"
+                android:textColor="@color/blue"
                     android:layout_marginRight="12dp"/>
 
 

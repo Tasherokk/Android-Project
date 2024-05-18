@@ -4,91 +4,109 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:elevation="4dp"
-    app:cardCornerRadius="20dp"
-    android:layout_margin="12dp">
+    android:elevation="8dp"
+    app:cardCornerRadius="16dp"
+    android:layout_margin="16dp"
+    android:background="@color/card_background_color">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_margin="12dp">
+        android:padding="16dp">
 
+        <!-- Title and Image Section -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
 
             <TextView
                 android:id="@+id/canon_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="32sp"
-                android:textStyle="bold"
+                android:textSize="28sp"
+                android:fontFamily="@font/font1"
+                android:textColor="@color/title_color"
+
+                android:textAlignment="center"
+                android:layout_marginBottom="12dp"
                 tools:text="Cowboy Bebop" />
 
             <ImageView
                 android:id="@+id/poster_image"
-                android:layout_width="177dp"
-                android:layout_height="180dp"
+                android:layout_width="150dp"
+                android:layout_height="200dp"
                 android:layout_gravity="center"
-                android:layout_marginTop="12dp"
-                android:contentDescription="Anime Image" />
+                android:scaleType="centerCrop"
+                android:contentDescription="Anime Image"
+                android:src="@drawable/baseline_image_24" />
         </LinearLayout>
 
-
+        <!-- Details Section -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_margin="16dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_marginTop="16dp">
 
             <TextView
                 android:id="@+id/start_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                tools:text="Created date" />
+                android:textSize="24sp"
+                android:fontFamily="@font/font2"
+                android:textColor="@color/detail_text_color"
+                tools:text="Created date: 1998-04-03" />
 
             <TextView
                 android:id="@+id/average_rating"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                tools:text="Average rating" />
+                android:textSize="24sp"
+                android:fontFamily="@font/font2"
+                android:textColor="@color/detail_text_color"
+                tools:text="Average rating: 8.5" />
 
             <TextView
                 android:id="@+id/age_rating"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                tools:text="Age Rating" />
+                android:textSize="24sp"
+                android:fontFamily="@font/font2"
+                android:textColor="@color/detail_text_color"
+                tools:text="Age Rating: PG-13" />
+        </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
+        <!-- Buttons Section -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="16dp">
+
+            <Button
+                android:id="@+id/favorite"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <Button
-                    android:id="@+id/favorite"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Favorite"
-                    />
-                <Button
-                    android:id="@+id/details"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="50dp"
-                    android:text="Details"/>
-            </LinearLayout>
+                android:text="Favorite"
+                android:textSize="24sp"
+                android:fontFamily="@font/font2"
+                android:backgroundTint="@color/background_color"
+                android:textColor="@color/blue"
+                android:layout_marginEnd="16dp" />
 
+            <Button
+                android:id="@+id/details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Details"
+                android:textSize="24sp"
+                android:fontFamily="@font/font2"
+                android:backgroundTint="@color/title_color"
+                android:textColor="@color/background_color"/>
         </LinearLayout>
     </LinearLayout>
-
 </androidx.cardview.widget.CardView>
-
-

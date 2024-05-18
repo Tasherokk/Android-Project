@@ -93,6 +93,9 @@ class KitsuDetailsFragment : Fragment() {
                         averageRating.text = "Rating: ${kitsu.attributes.averageRating}"
                         ageRating.text = "Age Rating: ${kitsu.attributes.ageRating}"
                         description.text = kitsu.attributes.description
+                        endDate.text = "End Date : ${kitsu.attributes.endDate}"
+                        status.text = "Status: ${kitsu.attributes.status}"
+                        subtype.text = "Subtype: ${kitsu.attributes.subtype}"
                         Glide.with(posterImage.context)
                             .load(poster)
                             .into(posterImage)

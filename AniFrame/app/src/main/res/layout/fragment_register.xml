@@ -8,6 +8,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/welcome"
+        android:fontFamily="@font/font1"
+        android:backgroundTint="@color/blue"
+        style="@style/TextAppearance.AppCompat.Widget.Button.Colored"
             android:gravity="center"
             android:textStyle="bold"
             android:textColor="@color/black"
@@ -23,12 +26,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Username"
+            android:fontFamily="@font/font2"
+            android:textSize="20dp"
+            android:backgroundTint="@color/blue"
+            style="@style/TextAppearance.AppCompat.Widget.Button.Colored"
                 android:inputType="text" />
         <EditText
                 android:id="@+id/email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Email"
+            android:fontFamily="@font/font2"
+            android:textSize="20dp"
+            android:backgroundTint="@color/blue"
+            style="@style/TextAppearance.AppCompat.Widget.Button.Colored"
                 android:inputType="textEmailAddress"
                 android:layout_marginTop="8dp"/>
         <EditText
@@ -36,12 +47,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Password"
+            android:fontFamily="@font/font2"
+            android:textSize="20dp"
+            android:backgroundTint="@color/blue"
+            style="@style/TextAppearance.AppCompat.Widget.Button.Colored"
                 android:inputType="textPassword"
                 android:layout_marginTop="8dp" />
         <Button
                 android:id="@+id/register_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+            android:fontFamily="@font/font1"
+            android:textSize="24dp"
+            android:backgroundTint="@color/blue"
+            style="@style/TextAppearance.AppCompat.Widget.Button.Colored"
                 android:text="Sign Up"
                 android:layout_marginTop="16dp" />
     </LinearLayout>
@@ -54,6 +73,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Already have an account? "
+
                 />
         <TextView
                 android:id="@+id/sign_in_text"

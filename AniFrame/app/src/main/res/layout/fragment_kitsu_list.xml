@@ -5,71 +5,114 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@color/material_dynamic_primary99"
     tools:context=".presentation.fragments.KitsuListFragment">
 
-
-
+    <!-- Search Section -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_margin="12dp">
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/poster_background"
+        android:padding="8dp"
+        android:elevation="4dp">
 
         <EditText
             android:id="@+id/searchEditText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="Search..." />
+            android:layout_gravity="center"
+            android:hint="Search..."
+            android:fontFamily="@font/font2"
+            android:textSize="20dp"
+            android:padding="8dp"
+            android:background="@drawable/edittext_background" />
 
         <Button
             android:id="@+id/searchButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Search" />
+            android:layout_marginStart="8dp"
+            android:text="Search"
+            android:fontFamily="@font/font2"
+            android:textSize="20dp"
+            android:textColor="@color/white"
+            style="@style/TextAppearance.AppCompat.Widget.Button.Colored"
+            android:backgroundTint="@color/title_color" />
     </LinearLayout>
 
+    <!-- Filter Section -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_margin="12dp">
+        android:layout_marginBottom="16dp">
+
         <Button
             android:id="@+id/all_button"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="All" />
+            android:layout_weight="1"
+            android:text="All"
+            android:fontFamily="@font/font2"
+            android:textSize="20dp"
+            android:backgroundTint="@color/blue"
+            style="@style/TextAppearance.AppCompat.Widget.Button.Colored" />
+
+        <View
+            android:layout_width="8dp"
+            android:layout_height="match_parent" />
+
         <Button
             android:id="@+id/trending"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Trending"/>
-
-
+            android:layout_weight="1"
+            android:text="Trending"
+            android:fontFamily="@font/font2"
+            android:textSize="20dp"
+            android:backgroundTint="@color/blue"
+            style="@style/TextAppearance.AppCompat.Widget.Button.Colored" />
     </LinearLayout>
+
+    <!-- Sorting Section -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_margin="12dp">
+        android:layout_marginBottom="16dp">
+
         <TextView
             android:id="@+id/sorting"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sort by" />
+            android:text="Sort by"
+            android:fontFamily="@font/font1"
+            android:textSize="36dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:layout_gravity="center_vertical" />
+
         <Button
             android:id="@+id/sort_rating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="12dp"
-            android:text="Rating"/>
-
-
+            android:layout_marginStart="16dp"
+            android:text="Rating"
+            android:fontFamily="@font/font2"
+            android:textSize="20dp"
+            android:backgroundTint="@color/blue"
+            style="@style/TextAppearance.AppCompat.Widget.Button.Colored" />
     </LinearLayout>
+
+    <!-- RecyclerView Section -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/kitsu_list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
 </LinearLayout>

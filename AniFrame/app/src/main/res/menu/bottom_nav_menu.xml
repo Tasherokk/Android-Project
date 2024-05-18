@@ -2,15 +2,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item android:title="Kitsu"
-        android:icon="@drawable/android_logo"
-        android:id="@+id/kitsu"/>
+        android:icon="@drawable/search"
+        android:id="@+id/kitsu" />
 
     <item android:title="Soruly"
-        android:icon="@drawable/android_logo"
+        android:icon="@drawable/photo"
         android:id="@+id/soruly"/>
 
     <item android:title="Favorite"
-        android:icon="@drawable/android_logo"
+        android:icon="@drawable/favs"
         android:id="@+id/favorite"/>
 
 
