@@ -37,13 +37,13 @@ AniFrame offers anime enthusiasts a comprehensive platform to discover, explore,
 
 ## Screenshots
 <div style="display: inline-block;">
-  <img src="assets/main.png" alt="Main" width="260"/>
-  <img src="assets/search.png" alt="Search" width="260"/>
-  <img src="assets/favorites_profile.png" alt="Favorites Profile" width="260"/>
-  <img src="assets/details.png" alt="Details" width="260"/>
-  <img src="assets/search_result.png" alt="Details" width="260"/>
-  <img src="assets/login.png" alt="Details" width="260"/>
-  <img src="assets/register.png" alt="Details" width="260"/>
+  <img src="assets/main.png" alt="Main" width="300"/>
+  <img src="assets/search.png" alt="Search" width="300"/>
+  <img src="assets/favorites_profile.png" alt="Favorites Profile" width="300"/>
+  <img src="assets/details.png" alt="Details" width="300"/>
+  <img src="assets/search_result.png" alt="Details" width="300"/>
+  <img src="assets/login.png" alt="Details" width="300"/>
+  <img src="assets/register.png" alt="Details" width="300"/>
 </div>
 
 
