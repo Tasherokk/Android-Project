@@ -51,13 +51,12 @@ class FavoritesAdapter(private val onDeleteAnime: (Kitsu) -> Unit,
     ): RecyclerView.ViewHolder(binding.root){
         fun bind(kitsu: Kitsu){
             with(binding){
-                val age = kitsu.attributes.ageRating
-                val poster = kitsu.attributes.posterImage.small
                 val spinner:Spinner = tagTitle
+                val poster = kitsu.attributes.posterImage.small
                 canonTitle.text = kitsu.attributes.canonicalTitle
-                startDate.text = "Start Date: " + kitsu.attributes.startDate
-                averageRating.text = kitsu.attributes.averageRating
-                ageRating.text = age.toString()
+                startDate.text = "Start Date: ${kitsu.attributes.startDate}"
+                averageRating.text = "Average Rating: ${kitsu.attributes.averageRating}"
+                ageRating.text = "Age Rating: ${kitsu.attributes.ageRating}"
                 Glide.with(posterImage)
                     .load(poster)
                     .into(posterImage)

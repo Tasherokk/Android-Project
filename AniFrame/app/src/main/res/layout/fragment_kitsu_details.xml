@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:padding="16dp"
     android:background="@color/background_color">
 
@@ -14,7 +14,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:gravity="center_horizontal">
+            android:gravity="center_horizontal"
+            android:padding="16dp"
+            android:background="@drawable/rounded_background">
 
             <!-- Poster Image -->
             <ImageView
@@ -24,6 +26,7 @@
                 android:layout_marginBottom="16dp"
                 android:background="@drawable/poster_background"
                 android:elevation="8dp"
+                android:padding="8dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/baseline_image_24" />
 
@@ -35,9 +38,10 @@
                 android:text="Title"
                 android:textAlignment="center"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textStyle="bold"
+                android:textSize="36dp"
                 android:textColor="@color/title_color"
-                android:layout_marginBottom="8dp" />
+                android:layout_marginBottom="8dp"
+                android:fontFamily="@font/font1" />
 
             <!-- Start Date -->
             <TextView
@@ -48,7 +52,18 @@
                 android:textAlignment="center"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="@color/text_color"
-                android:layout_marginBottom="4dp" />
+                android:layout_marginBottom="4dp"
+                android:fontFamily="@font/font1" />
+            <TextView
+                android:id="@+id/end_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="End Date: 2024-01-01"
+                android:textAlignment="center"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/text_color"
+                android:layout_marginBottom="4dp"
+                android:fontFamily="@font/font1" />
 
             <!-- Average Rating -->
             <TextView
@@ -59,7 +74,28 @@
                 android:textAlignment="center"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="@color/text_color"
-                android:layout_marginBottom="4dp" />
+                android:layout_marginBottom="4dp"
+                android:fontFamily="@font/font1" />
+            <TextView
+                android:id="@+id/subtype"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="subtype: OVA"
+                android:textAlignment="center"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/text_color"
+                android:layout_marginBottom="4dp"
+                android:fontFamily="@font/font1" />
+            <TextView
+                android:id="@+id/status"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="status: finished"
+                android:textAlignment="center"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/text_color"
+                android:layout_marginBottom="4dp"
+                android:fontFamily="@font/font1" />
 
             <!-- Age Rating -->
             <TextView
@@ -70,7 +106,9 @@
                 android:textAlignment="center"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="@color/text_color"
-                android:layout_marginBottom="16dp" />
+                android:layout_marginBottom="16dp"
+                android:fontFamily="@font/font1" />
+
 
             <!-- Description -->
             <TextView
@@ -83,7 +121,8 @@
                 android:background="@drawable/description_background"
                 android:padding="16dp"
                 android:layout_marginBottom="100dp"
-                android:elevation="4dp"/>
+                android:elevation="4dp"
+                android:fontFamily="@font/font2" />
         </LinearLayout>
     </ScrollView>
 </FrameLayout>
